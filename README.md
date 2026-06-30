@@ -1,5 +1,7 @@
 # aria-skills
 
+[![test](https://github.com/artherahq/skills/actions/workflows/test.yml/badge.svg)](https://github.com/artherahq/skills/actions/workflows/test.yml)
+
 Reusable [Agent Skills](https://docs.anthropic.com/en/docs/claude-code/skills) for
 quantitative finance research, extracted from the Aria toolchain so they can be
 installed into any Claude Code project — not just Aria.

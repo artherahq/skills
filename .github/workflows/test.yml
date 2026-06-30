@@ -1,0 +1,31 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  point-in-time-research:
+    name: point-in-time-research harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/point-in-time-research/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet pandas numpy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning information_set_compare.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_information_set_compare.py -q
