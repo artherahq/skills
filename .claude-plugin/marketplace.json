@@ -1,0 +1,22 @@
+{
+  "name": "aria-skills",
+  "owner": {
+    "name": "artherahq",
+    "url": "https://github.com/artherahq"
+  },
+  "metadata": {
+    "description": "Reusable Agent Skills for quantitative finance research, extracted from the Aria toolchain.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "quant-research-skills",
+      "description": "Skills that enforce research discipline for factor and strategy backtesting — point-in-time correctness, look-ahead detection, and the validation gauntlet.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/point-in-time-research"
+      ]
+    }
+  ]
+}
