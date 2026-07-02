@@ -1,0 +1,20 @@
+{
+  "schema_version": "aria.skill-policy.v1",
+  "allowed_tools": [
+    "get_market_data",
+    "get_market_history",
+    "calculate_factors",
+    "get_risk_metrics",
+    "analyze_news",
+    "web_search",
+    "web_fetch",
+    "research_report_assess",
+    "research_run_record_quality"
+  ],
+  "permissions": ["network", "workspace-write"],
+  "scripts": {
+    "execution": "approval",
+    "network": false,
+    "workspace_write": false
+  }
+}

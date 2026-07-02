@@ -1,0 +1,18 @@
+{
+  "schema_version": "aria.skills-lock.v1",
+  "organization": "artherahq",
+  "repository": "https://github.com/artherahq/skills",
+  "catalog_version": "0.3.0",
+  "skills": {
+    "quant-research-skills:equity-research-report": {
+      "path": "skills/equity-research-report",
+      "sha256": "d638145f2aecff630ee9baa59c3b66509232773f7c84d5ab4a13932daead85a8",
+      "version": "0.3.0"
+    },
+    "quant-research-skills:point-in-time-research": {
+      "path": "skills/point-in-time-research",
+      "sha256": "135165d672055f91cf13d952070f5673aadf15a51a9f015b21e9d9bfadd7d7af",
+      "version": "0.3.0"
+    }
+  }
+}

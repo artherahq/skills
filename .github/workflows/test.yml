@@ -7,6 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  catalog-integrity:
+    name: marketplace and skill integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Verify lock file
+        run: python scripts/build_skill_lock.py --check
+
+      - name: Test lock builder
+        working-directory: scripts
+        run: pytest test_build_skill_lock.py -q
+
   point-in-time-research:
     name: point-in-time-research harness
     runs-on: ubuntu-latest
@@ -29,3 +49,29 @@ jobs:
 
       - name: Regression tests
         run: pytest test_information_set_compare.py -q
+
+  equity-research-report:
+    name: equity research report gates
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/equity-research-report/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Regression tests
+        run: pytest test_validate_equity_report.py -q
+
+      - name: Invalid manifest fails closed
+        run: |
+          if python validate_equity_report.py /dev/null; then
+            echo "validator unexpectedly accepted an empty manifest"
+            exit 1
+          fi

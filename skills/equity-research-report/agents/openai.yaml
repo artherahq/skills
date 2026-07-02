@@ -1,0 +1,4 @@
+interface:
+  display_name: "Equity Research Report"
+  short_description: "Build evidence-backed equity reports with completion gates"
+  default_prompt: "Use $equity-research-report to produce a fully sourced equity research report with auditable quality checks."
