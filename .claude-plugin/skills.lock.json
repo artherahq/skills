@@ -6,7 +6,7 @@
   "skills": {
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
-      "sha256": "d638145f2aecff630ee9baa59c3b66509232773f7c84d5ab4a13932daead85a8",
+      "sha256": "a1992e9de8ad43a90eb8f9c13006a4e4336109768f83c233d0a817ab24ecefa2",
       "version": "0.3.0"
     },
     "quant-research-skills:point-in-time-research": {

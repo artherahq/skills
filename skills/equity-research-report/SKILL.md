@@ -20,11 +20,31 @@ Build a report through an explicit research workflow. Treat an attractive narrat
 4. Collect point-in-time evidence for market data, financial statements or filings, valuation inputs, risk history, and current catalysts. Record source, timestamp, and limitations for every item.
 5. Run independent technical, fundamental, valuation, risk, and catalyst analyses. Use deterministic calculations for indicators, multiples, returns, volatility, drawdown, and scenarios.
 6. Retry only missing or failed evidence, at most twice per gap. Fall back to deterministic analysis when an LLM fails but verified inputs remain available. Mark fallback output `degraded` and cap its confidence.
-7. Run a critic pass. Check unit scale, stale data, contradictory prices, unsupported targets, missing filings, circular citations, and conclusions that exceed the evidence.
+7. Run a critic pass. Check unit scale, stale data, contradictory prices, unsupported targets, missing filings, circular citations, undeclared primary-source substitution, unreconciled cross-source contradictions, and conclusions that exceed the evidence.
 8. Build the report and its machine-readable manifest. Include the decision trace: plan, tools used, evidence IDs, checks, retries, degraded steps, and unresolved limitations.
 9. Run `scripts/validate_equity_report.py MANIFEST.json`. Claim `complete` only when it exits successfully. Otherwise label the report `partial` or `blocked` and retain the failed checks.
 
 Read [references/completion-gates.md](references/completion-gates.md) before validating or changing completion criteria.
+
+## Primary-Source Honesty
+
+These rules exist because of an observed failure: an "verify ROE via the SEC
+10-Q" task had every EDGAR fetch fail, silently substituted aggregator sites,
+and then presented a confident conclusion — twice, with mutually inconsistent
+equity bases ($106B vs $83B → ROE 115% vs 147%) both labeled as evidence.
+
+1. **Declare substitution.** If the task names a primary source (SEC filing,
+   exchange notice, official IR release) and it cannot be retrieved, state
+   that at the TOP of the conclusion. Numbers from secondary/aggregator
+   sources must be labeled "not verified against the primary source", and the
+   report cannot claim the verification the task asked for.
+2. **Reconcile or flag contradictions.** When sources disagree materially,
+   never list both as evidence without comment. Identify the basis difference
+   (e.g. TTM-average vs quarter-end equity), reconcile to one number, or
+   report the range with the discrepancy as an explicit open issue.
+3. **Do not recommend what just failed.** A tool that failed repeatedly in
+   this session may only appear in next-step suggestions with that failure
+   noted (e.g. "peer_comparison failed 4x on network errors — retry later").
 
 ## Tool Routing
 
