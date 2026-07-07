@@ -23,6 +23,7 @@ verifies the catalog against `skills.lock.json` before anything executes.
 | [`risk-assessment`](skills/risk-assessment) | Decomposes portfolio/strategy risk from its actual history: VaR/CVaR with Cornish–Fisher tail adjustment, drawdown, concentration (effective N), diversification illusion via pairwise correlation, historical worst windows, and labeled linear beta shocks. Flags → risk level with mandatory disclosures; runnable harness (`scripts/risk_profile.py --demo`). |
 | [`factor-research`](skills/factor-research) | Judges whether a cross-sectional factor genuinely predicts returns: per-period rank IC/IR/t-stat, decay across horizons, quantile monotonicity, sub-period sign-flip detection, and turnover via rank autocorrelation. Verdict routes survivors to backtest-validation; runnable harness (`scripts/factor_evaluate.py --demo`). |
 | [`strategy-generation`](skills/strategy-generation) | Turns trading ideas into disciplined specs and implementations through a six-stage pipeline with three executable gates: a spec validator (hard risk controls, cost assumption, overfit preflight, forbidden-claim scan, honesty ledger for tried variants), then backtest-validation, then risk-assessment. Deploy advice caps at paper trading (`scripts/validate_strategy_spec.py --demo`). |
+| [`portfolio-optimization`](skills/portfolio-optimization) | Estimation-robust weights with no expected-return inputs: inverse vol, long-only min variance, ERC risk parity, and inline HRP — plus a walk-forward `compare` mode that reports honestly when the optimizer fails to beat equal weight out-of-sample. Disclosed covariance shrinkage; weights ship with risk contributions (`scripts/optimize_portfolio.py --demo`). |
 | [`equity-research-report`](skills/equity-research-report) | Produces comprehensive equity reports through an auditable plan, normalized evidence bundle, specialist agents, deterministic fallbacks, critic pass, and executable completion gates. |
 
 ## Install
@@ -41,6 +42,7 @@ $quant-research-skills:factor-research
 $quant-research-skills:backtest-validation
 $quant-research-skills:risk-assessment
 $quant-research-skills:strategy-generation
+$quant-research-skills:portfolio-optimization
 $quant-research-skills:equity-research-report
 ```
 
