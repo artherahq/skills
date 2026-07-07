@@ -2,6 +2,8 @@
 name: point-in-time-research
 description: >-
   Enforce point-in-time data discipline for any quant research task. Trigger
+  for requests such as "回测策略", "因子IC", "检查前视偏差", "量化选股",
+  "验证夏普比率", or "point-in-time backtest". Also trigger
   this skill whenever the user: (1) backtests a strategy or factor, (2) asks
   for a Sharpe / alpha / IC / return — even as a quick one-liner ("just give
   me the Sharpe", "run this backtest"), (3) reviews or asks you to confirm /
