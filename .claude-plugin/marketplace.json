@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Reusable Agent Skills for quantitative finance research, extracted from the Aria toolchain.",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "repository": "https://github.com/artherahq/skills"
   },
   "plugins": [
     {
       "name": "quant-research-skills",
-      "version": "0.8.0",
+      "version": "0.9.0",
       "description": "Skills that enforce research discipline for equity reports, factors, and strategy backtesting through evidence and deterministic validation gates.",
       "source": "./",
       "homepage": "https://github.com/artherahq/skills",
@@ -25,7 +25,8 @@
         "./skills/risk-assessment",
         "./skills/factor-research",
         "./skills/strategy-generation",
-        "./skills/portfolio-optimization"
+        "./skills/portfolio-optimization",
+        "./skills/execution-position"
       ]
     }
   ]
