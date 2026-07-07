@@ -2,17 +2,37 @@
   "schema_version": "aria.skills-lock.v1",
   "organization": "artherahq",
   "repository": "https://github.com/artherahq/skills",
-  "catalog_version": "0.3.0",
+  "catalog_version": "0.7.0",
   "skills": {
+    "quant-research-skills:backtest-validation": {
+      "path": "skills/backtest-validation",
+      "sha256": "1d52381a23da5cc516d7aff11f82ceedebadd2dfdee79a8dff5affbae6d07356",
+      "version": "0.7.0"
+    },
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
       "sha256": "a1992e9de8ad43a90eb8f9c13006a4e4336109768f83c233d0a817ab24ecefa2",
-      "version": "0.3.0"
+      "version": "0.7.0"
+    },
+    "quant-research-skills:factor-research": {
+      "path": "skills/factor-research",
+      "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
+      "version": "0.7.0"
     },
     "quant-research-skills:point-in-time-research": {
       "path": "skills/point-in-time-research",
       "sha256": "135165d672055f91cf13d952070f5673aadf15a51a9f015b21e9d9bfadd7d7af",
-      "version": "0.3.0"
+      "version": "0.7.0"
+    },
+    "quant-research-skills:risk-assessment": {
+      "path": "skills/risk-assessment",
+      "sha256": "536a8150a7ab6dbd51207c74f8fd95d5644e364631ef792b97382377329b7d08",
+      "version": "0.7.0"
+    },
+    "quant-research-skills:strategy-generation": {
+      "path": "skills/strategy-generation",
+      "sha256": "55ebb5b71a99ceb3315a3f56ef94f4e8826a52c8fe6545cd412eaaa081f922a6",
+      "version": "0.7.0"
     }
   }
 }

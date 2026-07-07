@@ -1,6 +1,6 @@
 # Agent Skill format
 
-A skill is a directory whose entry point is a `SKILL.md` file. Claude reads the
+A skill is a directory whose entry point is a `SKILL.md` file. Aria reads the
 frontmatter of every available skill at all times, but only loads the body when a
 task matches the `description`. Keep the frontmatter tight and the body focused.
 
@@ -15,9 +15,9 @@ my-skill/
 ---
 name: my-skill                 # kebab-case, unique, matches the folder name
 description: >-                 # the single most important field — it is the
-  One or two sentences that     # ONLY thing Claude sees when deciding whether to
-  say exactly when to trigger   # load the skill. Name concrete triggers and, if
-  this skill, in the user's     # useful, when NOT to trigger.
+  One or two sentences that     # ONLY thing the agent sees when deciding whether
+  say exactly when to trigger   # to load the skill. Name concrete triggers and,
+  this skill, in the user's     # if useful, when NOT to trigger.
   own words.
 ---
 
