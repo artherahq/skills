@@ -59,6 +59,30 @@ def test_color_in_comment_not_flagged(tmp_path):
     assert lint_file(p, _allowed()) == []
 
 
+def test_color_hex_initializer_without_hash_flagged(tmp_path):
+    """Color(hex: "64748B") — the # is omitted, must still be caught."""
+    p = _write(tmp_path, "V.swift", 'let c = Color(hex: "64748B")\n')
+    v = [x for x in lint_file(p, _allowed()) if x["rule"] == "color_off_system"]
+    assert v and "#64748b" in v[0]["message"]
+
+
+def test_color_hex_initializer_in_palette_is_clean(tmp_path):
+    p = _write(tmp_path, "V.swift", 'let c = Color(hex: "2f6bff")\n')  # accent, no hash
+    assert not any(x["rule"] == "color_off_system" for x in lint_file(p, _allowed()))
+
+
+def test_chromatic_named_color_flagged_as_warn(tmp_path):
+    p = _write(tmp_path, "V.swift", "Circle().fill(Color.green)\n")
+    v = [x for x in lint_file(p, _allowed()) if x["rule"] == "named_color_off_system"]
+    assert v and v[0]["severity"] == "warn" and "green" in v[0]["message"]
+
+
+def test_neutral_named_colors_not_flagged(tmp_path):
+    """white/black/gray/clear are structural — not chromatic brand hues, so not flagged."""
+    p = _write(tmp_path, "V.swift", "Color.white.opacity(0.5); Color.black; Color.clear\n")
+    assert not any(x["rule"] == "named_color_off_system" for x in lint_file(p, _allowed()))
+
+
 def test_rounding_equivalent_color_within_tolerance_is_clean(tmp_path):
     p = _write(tmp_path, "V.css", "a { color: #2f6cff; }\n")   # dist 1 from accent
     assert not any(x["rule"] == "color_off_system" for x in lint_file(p, _allowed()))
