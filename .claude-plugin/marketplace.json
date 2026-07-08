@@ -28,6 +28,18 @@
         "./skills/portfolio-optimization",
         "./skills/execution-position"
       ]
+    },
+    {
+      "name": "app-engineering-skills",
+      "version": "0.9.0",
+      "description": "Skills that help the user build and enforce their own app-engineering conventions — a design system of their choosing — separate from the quant-research pipeline.",
+      "source": "./",
+      "homepage": "https://github.com/artherahq/skills",
+      "repository": "https://github.com/artherahq/skills",
+      "strict": false,
+      "skills": [
+        "./skills/ui-design-system"
+      ]
     }
   ]
 }
