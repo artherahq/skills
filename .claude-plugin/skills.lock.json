@@ -4,6 +4,11 @@
   "repository": "https://github.com/artherahq/skills",
   "catalog_version": "0.9.0",
   "skills": {
+    "app-engineering-skills:ui-design-system": {
+      "path": "skills/ui-design-system",
+      "sha256": "bdd1f691b4b149da2d8b36a4a2c783f8ea4786ce1c04e16a1228a3299dcd844c",
+      "version": "0.9.0"
+    },
     "quant-research-skills:backtest-validation": {
       "path": "skills/backtest-validation",
       "sha256": "1d52381a23da5cc516d7aff11f82ceedebadd2dfdee79a8dff5affbae6d07356",

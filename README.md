@@ -27,6 +27,14 @@ verifies the catalog against `skills.lock.json` before anything executes.
 | [`execution-position`](skills/execution-position) | The pre-trade gate: sizes a signal (vol-target, or fractional Kelly only from a declared edge, hard-capped at 0.25), checks position/gross/cash/liquidity limits and stop-distance sanity, estimates costs, and emits paper-only order intents — live execution fails mechanically (`scripts/position_gate.py --demo`). |
 | [`equity-research-report`](skills/equity-research-report) | Produces comprehensive equity reports through an auditable plan, normalized evidence bundle, specialist agents, deterministic fallbacks, critic pass, and executable completion gates. |
 
+The `quant-research-skills` plugin above is the research pipeline. A second
+plugin, `app-engineering-skills`, helps the user build apps to their own
+standards:
+
+| Skill | What it does |
+|---|---|
+| [`ui-design-system`](skills/ui-design-system) | Helps the user establish and enforce **their own** design system: freezes their palette/type/radius/spacing choices into a portable `design-tokens.json`, validates it objectively (WCAG contrast, monotonic scales), then lints generated UI (SwiftUI/CSS/RN/Flutter) for color and radius literals that drift off *their* tokens. Taste stays the user's; consistency and accessibility are enforced by script. No house style of its own — runnable harnesses (`scripts/design_tokens.py --demo`, `scripts/design_lint.py --demo`). |
+
 ## Install
 
 Aria Code discovers the catalog through `ARIA_SKILLS_PATH` or a sibling
