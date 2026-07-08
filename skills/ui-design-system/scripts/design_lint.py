@@ -52,9 +52,11 @@ _EMOJI_RE = re.compile(
 _HEX_RE = re.compile(r"#[0-9A-Fa-f]{6}\b")
 _SWIFT_RGB_RE = re.compile(r"Color\(\s*red:\s*([\d.]+),\s*green:\s*([\d.]+),\s*blue:\s*([\d.]+)")
 _CSS_RGB_RE = re.compile(r"rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})")
-# hex passed through a Color(hex:)/UIColor(hex:) convenience initializer — the # is
-# often omitted (e.g. Color(hex: "64748B")), so it slips past the bare-hex regex above.
-_HEX_FUNC_RE = re.compile(r"\b(?:UI)?Color\(\s*hex:\s*\"#?([0-9A-Fa-f]{6})\"")
+# hex passed through a Color(hex:) initializer OR a Color.hex(...) static helper —
+# the # is often omitted (Color(hex: "64748B"), Color.hex("1F2328", ...)), so both
+# slip past the bare-hex regex above.
+_HEX_FUNC_RE = re.compile(
+    r"\b(?:UI)?Color(?:\(\s*hex:\s*|\.hex\(\s*)\"#?([0-9A-Fa-f]{6})\"")
 # chromatic system colors used as literals (Color.green, Color.red, …). Neutral system
 # colors (white/black/gray/clear/primary/secondary) are intentionally NOT flagged — they
 # are structural and usually fine; the chromatic ones carry brand hue and belong in tokens.

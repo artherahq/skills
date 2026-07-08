@@ -6,7 +6,7 @@
   "skills": {
     "app-engineering-skills:ui-design-system": {
       "path": "skills/ui-design-system",
-      "sha256": "df803c88d5be078d731c6b99b7afbe5f905db181a906dd14951430fe287e322f",
+      "sha256": "8b4801a97478d5a3389d165f6223cf9e6a78084c2541d4f84855cec0aa95115c",
       "version": "0.9.0"
     },
     "quant-research-skills:backtest-validation": {

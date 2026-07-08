@@ -71,6 +71,13 @@ def test_color_hex_initializer_in_palette_is_clean(tmp_path):
     assert not any(x["rule"] == "color_off_system" for x in lint_file(p, _allowed()))
 
 
+def test_color_hex_static_helper_flagged(tmp_path):
+    """Color.hex("1F2328", fallback: .black) — static-method form, must also be caught."""
+    p = _write(tmp_path, "V.swift", 'let c = Color.hex("1F2328", fallback: .black)\n')
+    v = [x for x in lint_file(p, _allowed()) if x["rule"] == "color_off_system"]
+    assert v and "#1f2328" in v[0]["message"]
+
+
 def test_chromatic_named_color_flagged_as_warn(tmp_path):
     p = _write(tmp_path, "V.swift", "Circle().fill(Color.green)\n")
     v = [x for x in lint_file(p, _allowed()) if x["rule"] == "named_color_off_system"]
