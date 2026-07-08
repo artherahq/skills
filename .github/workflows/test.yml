@@ -75,3 +75,27 @@ jobs:
             echo "validator unexpectedly accepted an empty manifest"
             exit 1
           fi
+
+  ui-design-system:
+    name: ui-design-system harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/ui-design-system/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — both harnesses run their self-contained demo
+        run: |
+          python design_tokens.py --demo > /dev/null
+          python design_lint.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest -q
