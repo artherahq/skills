@@ -9,7 +9,9 @@
     "web_search",
     "web_fetch",
     "research_report_assess",
-    "research_run_record_quality"
+    "research_run_record_quality",
+    "read_file",
+    "analyze_file"
   ],
   "permissions": ["network", "workspace-write"],
   "scripts": {
