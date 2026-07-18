@@ -6,7 +6,7 @@
   "skills": {
     "app-engineering-skills:ui-design-system": {
       "path": "skills/ui-design-system",
-      "sha256": "bdd1f691b4b149da2d8b36a4a2c783f8ea4786ce1c04e16a1228a3299dcd844c",
+      "sha256": "8b4801a97478d5a3389d165f6223cf9e6a78084c2541d4f84855cec0aa95115c",
       "version": "0.9.0"
     },
     "quant-research-skills:backtest-validation": {
@@ -16,7 +16,7 @@
     },
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
-      "sha256": "a1992e9de8ad43a90eb8f9c13006a4e4336109768f83c233d0a817ab24ecefa2",
+      "sha256": "989972655bd94eb4b69d1fd3ccb74a09a699ec6e74c08d13707b6ffa8bf5c17f",
       "version": "0.9.0"
     },
     "quant-research-skills:execution-position": {

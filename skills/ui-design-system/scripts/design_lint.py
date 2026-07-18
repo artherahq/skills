@@ -52,6 +52,16 @@ _EMOJI_RE = re.compile(
 _HEX_RE = re.compile(r"#[0-9A-Fa-f]{6}\b")
 _SWIFT_RGB_RE = re.compile(r"Color\(\s*red:\s*([\d.]+),\s*green:\s*([\d.]+),\s*blue:\s*([\d.]+)")
 _CSS_RGB_RE = re.compile(r"rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})")
+# hex passed through a Color(hex:) initializer OR a Color.hex(...) static helper —
+# the # is often omitted (Color(hex: "64748B"), Color.hex("1F2328", ...)), so both
+# slip past the bare-hex regex above.
+_HEX_FUNC_RE = re.compile(
+    r"\b(?:UI)?Color(?:\(\s*hex:\s*|\.hex\(\s*)\"#?([0-9A-Fa-f]{6})\"")
+# chromatic system colors used as literals (Color.green, Color.red, …). Neutral system
+# colors (white/black/gray/clear/primary/secondary) are intentionally NOT flagged — they
+# are structural and usually fine; the chromatic ones carry brand hue and belong in tokens.
+_NAMED_COLOR_RE = re.compile(
+    r"\bColor\.(red|green|blue|orange|yellow|pink|purple|teal|indigo|mint|cyan|brown)\b")
 _RADIUS_RE = re.compile(r"(?:cornerRadius|border-?[Rr]adius)\s*:?\s*\(?\s*(\d+(?:\.\d+)?)")
 # font size: SwiftUI .system(size: N) / Font.system(size: N), CSS font-size: Npx, RN fontSize: N
 _FONT_SIZE_RE = re.compile(r"(?:\.system\(size:\s*|font-size:\s*|fontSize:\s*)(\d+(?:\.\d+)?)")
@@ -171,10 +181,12 @@ def lint_file(path: Path, allowed: AllowedTokens,
                           "emoji character — tokens declare emoji_icons=forbid; use a real icon"))
         code = _strip_comment(raw)
 
-        # colors
+        # colors — hex literals in every form we recognize, normalized to #rrggbb
         found_hex: set[str] = set()
         for m in _HEX_RE.finditer(code):
             found_hex.add(_norm_hex(m.group(0)))
+        for m in _HEX_FUNC_RE.finditer(code):
+            found_hex.add(_norm_hex(m.group(1)))
         for m in _SWIFT_RGB_RE.finditer(code):
             found_hex.add(_rgb01_to_hex(*m.groups()))
         for m in _CSS_RGB_RE.finditer(code):
@@ -189,6 +201,13 @@ def lint_file(path: Path, allowed: AllowedTokens,
             if name:
                 msg += f" (nearest token: {name} {ahex})"
             out.append(_v(path, lineno, "color_off_system", "error", code.strip(), msg))
+
+        # chromatic system colors (Color.green, Color.red, …) — no hex to compare,
+        # but they bypass the palette by definition
+        for m in _NAMED_COLOR_RE.finditer(code):
+            out.append(_v(path, lineno, "named_color_off_system", "warn", code.strip(),
+                          f"Color.{m.group(1)} is a system color, not a design token — "
+                          f"route through the palette (e.g. a market/semantic token)"))
 
         # radii
         for m in _RADIUS_RE.finditer(code):

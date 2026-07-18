@@ -91,11 +91,15 @@ durable value here is **the user's own consistency**, enforced deterministically
 - `scripts/design_lint.py` — enforces generated code against the user's tokens
   (`--tokens FILE --paths ...`) across every dimension the file declares:
   off-system color literals (error; rounding tolerance + nearest-token
-  suggestion), and off-system radius / font-size / spacing literals (warn; each
-  linted only if that block exists in the tokens, each with a nearest-token
-  hint). Emoji rule per the file's own convention. `--demo` for a self-contained
-  smoke test. Exits non-zero on any error-severity violation, so it drops into a
-  pre-commit hook or CI step — see `references/methodology.md`.
+  suggestion) — recognized as `#rrggbb`, `Color(red:g:b:)`, `rgb()/rgba()`, and
+  `Color(hex:"…")` (the `#` is often omitted); chromatic system colors like
+  `Color.green`/`.red` (warn) since they bypass the palette by definition
+  (neutral white/black/gray are left alone); and off-system radius / font-size /
+  spacing literals (warn; each linted only if that block exists in the tokens,
+  each with a nearest-token hint). Emoji rule per the file's own convention.
+  `--demo` for a self-contained smoke test. Exits non-zero on any error-severity
+  violation, so it drops into a pre-commit hook or CI step — see
+  `references/methodology.md`.
 - `references/token_schema.md` — the platform-neutral `design-tokens.json`
   schema, with field meanings and target-mapping notes.
 - `references/methodology.md` — how to establish tokens from user input
