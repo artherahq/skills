@@ -29,6 +29,11 @@
       "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
       "version": "0.9.0"
     },
+    "quant-research-skills:multiple-testing-correction": {
+      "path": "skills/multiple-testing-correction",
+      "sha256": "38771e5e5c0cfc3fdad71bb0a8b6a57fb814c555794ceaa16fb84b565b1b81ee",
+      "version": "0.9.0"
+    },
     "quant-research-skills:point-in-time-research": {
       "path": "skills/point-in-time-research",
       "sha256": "135165d672055f91cf13d952070f5673aadf15a51a9f015b21e9d9bfadd7d7af",
