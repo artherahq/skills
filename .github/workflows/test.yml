@@ -50,6 +50,29 @@ jobs:
       - name: Regression tests
         run: pytest test_information_set_compare.py -q
 
+  multiple-testing-correction:
+    name: multiple-testing-correction harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/multiple-testing-correction/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet numpy scipy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning multiplicity_gate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_multiplicity_gate.py -q
+
   equity-research-report:
     name: equity research report gates
     runs-on: ubuntu-latest
