@@ -24,6 +24,7 @@
         "./skills/backtest-validation",
         "./skills/compliance-audit-trail",
         "./skills/multiple-testing-correction",
+        "./skills/gamma-exposure",
         "./skills/risk-assessment",
         "./skills/factor-research",
         "./skills/strategy-generation",
