@@ -50,6 +50,29 @@ jobs:
       - name: Regression tests
         run: pytest test_information_set_compare.py -q
 
+  compliance-audit-trail:
+    name: compliance-audit-trail harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/compliance-audit-trail/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning governance_manifest_gate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_governance_manifest_gate.py -q
+
   multiple-testing-correction:
     name: multiple-testing-correction harness
     runs-on: ubuntu-latest
