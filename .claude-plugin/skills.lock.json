@@ -14,6 +14,11 @@
       "sha256": "1d52381a23da5cc516d7aff11f82ceedebadd2dfdee79a8dff5affbae6d07356",
       "version": "0.9.0"
     },
+    "quant-research-skills:compliance-audit-trail": {
+      "path": "skills/compliance-audit-trail",
+      "sha256": "f71a1505723a649210a20d3348293a028e668fca9136a31388d967f2871e85f9",
+      "version": "0.9.0"
+    },
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
       "sha256": "a1992e9de8ad43a90eb8f9c13006a4e4336109768f83c233d0a817ab24ecefa2",

@@ -22,6 +22,7 @@
         "./skills/point-in-time-research",
         "./skills/equity-research-report",
         "./skills/backtest-validation",
+        "./skills/compliance-audit-trail",
         "./skills/risk-assessment",
         "./skills/factor-research",
         "./skills/strategy-generation",
