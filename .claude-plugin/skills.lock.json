@@ -6,7 +6,7 @@
   "skills": {
     "app-engineering-skills:ui-design-system": {
       "path": "skills/ui-design-system",
-      "sha256": "bdd1f691b4b149da2d8b36a4a2c783f8ea4786ce1c04e16a1228a3299dcd844c",
+      "sha256": "8b4801a97478d5a3389d165f6223cf9e6a78084c2541d4f84855cec0aa95115c",
       "version": "0.9.0"
     },
     "quant-research-skills:backtest-validation": {
@@ -21,7 +21,7 @@
     },
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
-      "sha256": "a1992e9de8ad43a90eb8f9c13006a4e4336109768f83c233d0a817ab24ecefa2",
+      "sha256": "989972655bd94eb4b69d1fd3ccb74a09a699ec6e74c08d13707b6ffa8bf5c17f",
       "version": "0.9.0"
     },
     "quant-research-skills:execution-position": {
@@ -32,6 +32,11 @@
     "quant-research-skills:factor-research": {
       "path": "skills/factor-research",
       "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
+      "version": "0.9.0"
+    },
+    "quant-research-skills:multiple-testing-correction": {
+      "path": "skills/multiple-testing-correction",
+      "sha256": "38771e5e5c0cfc3fdad71bb0a8b6a57fb814c555794ceaa16fb84b565b1b81ee",
       "version": "0.9.0"
     },
     "quant-research-skills:point-in-time-research": {
