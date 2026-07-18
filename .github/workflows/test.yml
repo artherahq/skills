@@ -96,6 +96,29 @@ jobs:
       - name: Regression tests
         run: pytest test_multiplicity_gate.py -q
 
+  gamma-exposure:
+    name: gamma-exposure harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/gamma-exposure/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning gex_gate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_gex_gate.py -q
+
   equity-research-report:
     name: equity research report gates
     runs-on: ubuntu-latest

@@ -34,6 +34,11 @@
       "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
       "version": "0.9.0"
     },
+    "quant-research-skills:gamma-exposure": {
+      "path": "skills/gamma-exposure",
+      "sha256": "3dcafefaeb86ba0042ef39675e8e2723649bcb48c55ecc166a78622b34c71e4a",
+      "version": "0.9.0"
+    },
     "quant-research-skills:multiple-testing-correction": {
       "path": "skills/multiple-testing-correction",
       "sha256": "38771e5e5c0cfc3fdad71bb0a8b6a57fb814c555794ceaa16fb84b565b1b81ee",
