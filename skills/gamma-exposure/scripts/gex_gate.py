@@ -50,21 +50,28 @@ def black_scholes_gamma(S: float, K: float, T: float, sigma: float, r: float = 0
 # ───────────────────────────── GEX computation ────────────────────────────────
 
 DEALER_ASSUMPTION_DISCLOSURE = (
-    "GEX assumes dealers are net short customer option flow (customers net "
-    "buyers, dealers net sellers) and delta-hedge accordingly: call OI "
-    "contributes positive gamma exposure, put OI contributes negative gamma "
-    "exposure. This is the standard public-GEX-calculator convention, not a "
-    "directly observable fact — no public dataset shows dealers' actual "
-    "positioning, and this estimate would be wrong wherever that assumption "
-    "doesn't hold (e.g. a dealer already long gamma from a prior hedge)."
+    "Dealer-positioning assumption follows SqueezeMetrics' original GEX "
+    "whitepaper (2016, rev. 2017): investors are net sellers of calls "
+    "(covered-call/collar overwriting), so dealers are net long call gamma "
+    "(+); investors are net buyers of puts (protective puts), so dealers are "
+    "net short put gamma (-). Also assumes dealers hedge precisely to delta, "
+    "ignoring the hedging bands real market-makers use to balance hedging "
+    "cost against delta risk (the paper's own fourth assumption). None of "
+    "this is directly observable — no public dataset shows dealers' actual "
+    "positioning, and the estimate is wrong wherever these assumptions don't "
+    "hold (e.g. a dealer already long gamma from a prior hedge)."
 )
 
 COVERAGE_LIMITATION = (
     "Computed from a single expiration's open interest and implied "
-    "volatility snapshot. Ignores other expirations contributing to the "
-    "same hedging book, intraday OI changes since the snapshot, and any "
-    "non-listed / OTC options exposure — free listed-equity-options data "
-    "does not cover index or OTC flow, which is often the larger book."
+    "volatility snapshot — the original whitepaper's own GEX figure sums "
+    "across ALL expirations for the underlying, so this is narrower than "
+    "that methodology, not equivalent to it. Also ignores intraday OI "
+    "changes since the snapshot and any non-listed/OTC options exposure — "
+    "free listed-equity-options data does not cover index or OTC flow, "
+    "which is often the larger book. The per-strike zero-gamma flip and "
+    "gamma-wall levels are a popularized charting-service extension (not "
+    "part of the original whitepaper, which computes one aggregate number)."
 )
 
 

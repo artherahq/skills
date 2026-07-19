@@ -36,7 +36,7 @@
     },
     "quant-research-skills:gamma-exposure": {
       "path": "skills/gamma-exposure",
-      "sha256": "3dcafefaeb86ba0042ef39675e8e2723649bcb48c55ecc166a78622b34c71e4a",
+      "sha256": "380d42fc480815236213595b87e95e994e70589589b6a00c70535af1452b84b7",
       "version": "0.9.0"
     },
     "quant-research-skills:multiple-testing-correction": {
