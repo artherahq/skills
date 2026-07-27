@@ -4,6 +4,11 @@
   "repository": "https://github.com/artherahq/skills",
   "catalog_version": "0.9.0",
   "skills": {
+    "app-engineering-skills:trading-ui-patterns": {
+      "path": "skills/trading-ui-patterns",
+      "sha256": "c866b4483b8e8a3a1a8647752198802596b20fa217055600058fa10dee5f7f7f",
+      "version": "0.9.0"
+    },
     "app-engineering-skills:ui-design-system": {
       "path": "skills/ui-design-system",
       "sha256": "8b4801a97478d5a3389d165f6223cf9e6a78084c2541d4f84855cec0aa95115c",

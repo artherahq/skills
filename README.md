@@ -37,6 +37,7 @@ standards:
 | Skill | What it does |
 |---|---|
 | [`ui-design-system`](skills/ui-design-system) | Helps the user establish and enforce **their own** design system: freezes their palette/type/radius/spacing choices into a portable `design-tokens.json`, validates it objectively (WCAG contrast, monotonic scales), then lints generated UI (SwiftUI/CSS/RN/Flutter) for color and radius literals that drift off *their* tokens. Taste stays the user's; consistency and accessibility are enforced by script. No house style of its own — runnable harnesses (`scripts/design_tokens.py --demo`, `scripts/design_lint.py --demo`). |
+| [`trading-ui-patterns`](skills/trading-ui-patterns) | The opposite of `ui-design-system`: this one *does* have a house style — three of them. Encodes X (timeline post, action bar), TradingView (watchlist row, technical rating gauge), and Trading212 (order ticket, holdings row) component conventions, then audits a component manifest against the claimed pattern's checklist. Catches the market-convention bug that looks completely fine at a glance: red/green direction color hardcoded from one market (US) silently rendering backwards on another (CN/TW), the same failure shape as a sign-convention flip in a quant computation — runnable harness (`scripts/pattern_audit.py --demo`). |
 
 ## Install
 

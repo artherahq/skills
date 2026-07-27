@@ -168,3 +168,26 @@ jobs:
 
       - name: Regression tests
         run: pytest -q
+
+  trading-ui-patterns:
+    name: trading-ui-patterns harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/trading-ui-patterns/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning pattern_audit.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_pattern_audit.py -q
