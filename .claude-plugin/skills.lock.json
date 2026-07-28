@@ -16,7 +16,7 @@
     },
     "quant-research-skills:backtest-validation": {
       "path": "skills/backtest-validation",
-      "sha256": "1d52381a23da5cc516d7aff11f82ceedebadd2dfdee79a8dff5affbae6d07356",
+      "sha256": "5018ca5a01aa6318b56b6be6a9a22a9c9dec0397414b4145cd06e8341c566cae",
       "version": "0.9.0"
     },
     "quant-research-skills:compliance-audit-trail": {
@@ -36,7 +36,7 @@
     },
     "quant-research-skills:factor-research": {
       "path": "skills/factor-research",
-      "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
+      "sha256": "0e5c4545bea7bd0fb06e0d314f3c4024d2df1e02bface482b175425214170e17",
       "version": "0.9.0"
     },
     "quant-research-skills:gamma-exposure": {
@@ -46,22 +46,22 @@
     },
     "quant-research-skills:multiple-testing-correction": {
       "path": "skills/multiple-testing-correction",
-      "sha256": "38771e5e5c0cfc3fdad71bb0a8b6a57fb814c555794ceaa16fb84b565b1b81ee",
+      "sha256": "59704f30473c32ad3a820f20114dac54991f723a0c698d83f044b8e98799d9af",
       "version": "0.9.0"
     },
     "quant-research-skills:point-in-time-research": {
       "path": "skills/point-in-time-research",
-      "sha256": "135165d672055f91cf13d952070f5673aadf15a51a9f015b21e9d9bfadd7d7af",
+      "sha256": "d7c142f56871f8909785de0d78389639f9140606383c7a67bf82c5359a59f77f",
       "version": "0.9.0"
     },
     "quant-research-skills:portfolio-optimization": {
       "path": "skills/portfolio-optimization",
-      "sha256": "58b825d7c7535f0930191ea4f9fabb14baf4d1c7cbc7c6429c2e0f2049f28761",
+      "sha256": "40b2323b03ac4f7cada4485831bb7f91bf81a329454d8868965ba6cfa74fed61",
       "version": "0.9.0"
     },
     "quant-research-skills:risk-assessment": {
       "path": "skills/risk-assessment",
-      "sha256": "536a8150a7ab6dbd51207c74f8fd95d5644e364631ef792b97382377329b7d08",
+      "sha256": "ab2f06857f05f20112d64b958d929f5288882055505ba3a49bfa9c7aac56057b",
       "version": "0.9.0"
     },
     "quant-research-skills:strategy-generation": {

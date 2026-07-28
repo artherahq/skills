@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+# ]
+# ///
 """
 factor_evaluate.py — is this factor real, or noise wearing a rank?
 

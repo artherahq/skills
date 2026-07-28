@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+# ]
+# ///
 """
 optimize_portfolio.py — estimation-robust weights, with the honesty check
 most optimizers skip: does the clever method actually beat equal weight
