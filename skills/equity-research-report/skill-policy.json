@@ -13,6 +13,14 @@
     "read_file",
     "analyze_file"
   ],
+  "agents": [
+    "fundamental",
+    "technical",
+    "risk",
+    "news",
+    "catalyst",
+    "synthesis"
+  ],
   "permissions": ["network", "workspace-write"],
   "scripts": {
     "execution": "approval",

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Terminal & Software UI Design"
+  short_description: "Design dense terminal, dashboard, and desktop software UI"
+  default_prompt: "Use $terminal-software-design to review this terminal or dashboard UI for density, semantics, and native-chrome issues."

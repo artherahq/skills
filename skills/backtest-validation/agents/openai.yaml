@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backtest Validation"
+  short_description: "Judge whether a backtest is trustworthy before drawing conclusions from it"
+  default_prompt: "Use $backtest-validation to check this backtest for overfitting, cost sensitivity, and out-of-sample decay."

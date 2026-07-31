@@ -1,0 +1,4 @@
+interface:
+  display_name: "Point-in-Time Research"
+  short_description: "Enforce point-in-time data discipline and catch lookahead leaks"
+  default_prompt: "Use $point-in-time-research to check this research design for lookahead bias and information-set leaks."

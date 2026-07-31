@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trading UI Patterns"
+  short_description: "Match X, TradingView, and Trading212 component conventions"
+  default_prompt: "Use $trading-ui-patterns to build or audit this component against the reference product's own conventions."

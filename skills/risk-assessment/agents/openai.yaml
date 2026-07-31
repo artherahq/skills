@@ -1,0 +1,4 @@
+interface:
+  display_name: "Risk Assessment"
+  short_description: "Decompose portfolio risk from actual history — VaR, drawdown, concentration"
+  default_prompt: "Use $risk-assessment to decompose this portfolio's risk and surface its concentration and tail exposure."

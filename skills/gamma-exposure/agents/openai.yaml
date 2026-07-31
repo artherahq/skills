@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gamma Exposure (GEX)"
+  short_description: "Compute and audit dealer gamma exposure from options open interest"
+  default_prompt: "Use $gamma-exposure to compute dealer gamma exposure and audit the report before it is shared."
