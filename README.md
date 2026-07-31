@@ -14,6 +14,25 @@ The catalog uses the open Agent Skills layout — a flat `skills/` directory, a
 runtime. Aria Code is the first-class consumer: its portable skill loader
 verifies the catalog against `skills.lock.json` before anything executes.
 
+> [!IMPORTANT]
+> **Nothing in this repository constitutes investment, legal, tax, or
+> accounting advice.** These skills produce analyst work product — factor
+> studies, backtest validations, risk decompositions, strategy specs, research
+> notes — for review by a qualified professional. They do not make investment
+> recommendations and they do not execute trades: `execution-position` emits
+> paper-only order intents and fails mechanically on any live-execution path.
+> Every output is staged for human sign-off.
+>
+> A PASS verdict from any gate in this catalog means the declared checks ran
+> and passed on the inputs you supplied — it is not a claim that a strategy is
+> profitable, that a backtest will generalize, or that a risk model captures
+> your actual exposure. Validation gates catch known failure modes; they cannot
+> certify an unknown one.
+>
+> You are responsible for verifying outputs and for compliance with the laws
+> and regulations that apply to you or your firm. Provided as-is, without
+> warranty of any kind — see [LICENSE](LICENSE).
+
 ## Skills
 
 | Skill | What it does |
@@ -38,6 +57,9 @@ standards:
 |---|---|
 | [`ui-design-system`](skills/ui-design-system) | Helps the user establish and enforce **their own** design system: freezes their palette/type/radius/spacing choices into a portable `design-tokens.json`, validates it objectively (WCAG contrast, monotonic scales), then lints generated UI (SwiftUI/CSS/RN/Flutter) for color and radius literals that drift off *their* tokens. Taste stays the user's; consistency and accessibility are enforced by script. No house style of its own — runnable harnesses (`scripts/design_tokens.py --demo`, `scripts/design_lint.py --demo`). |
 | [`trading-ui-patterns`](skills/trading-ui-patterns) | The opposite of `ui-design-system`: this one *does* have a house style — three of them. Encodes X (timeline post, action bar), TradingView (watchlist row, technical rating gauge), and Trading212 (order ticket, holdings row) component conventions, then audits a component manifest against the claimed pattern's checklist. Catches the market-convention bug that looks completely fine at a glance: red/green direction color hardcoded from one market (US) silently rendering backwards on another (CN/TW), the same failure shape as a sign-convention flip in a quant computation — runnable harness (`scripts/pattern_audit.py --demo`). |
+| [`terminal-software-design`](skills/terminal-software-design) | Neither of the above two — this is the density/composition/native-chrome discipline that applies to terminals, IDEs, and dashboards regardless of whether you're also freezing tokens or matching a reference product. Covers why density is correct (not a compromise) in a working tool, semantic-vs-brand color, tabular numeric alignment, keyboard-first interaction, sidebar/popover/segmented-toggle failure modes, and Electron-specific pitfalls (native window background bleeding at theme boundaries, traffic-light centering). Four real before/after bugs from a production trading terminal, cross-referenced from each section. Pure reference, no scripts — every file is self-contained prose that works pasted into any assistant, not only inside this harness. |
+| [`conversational-ui-restraint`](skills/conversational-ui-restraint) | The opposite instinct from `terminal-software-design`: for chat/copilot interfaces, restraint is correct, not density — the UI should disappear and the content (prose) should be what's remembered. Distills the actual discipline behind ChatGPT/Claude/Codex-style interfaces (not their internal tooling, which isn't knowable from outside — this is reverse-engineered from observable shipped design): near-monochrome color reserved for signal, content-over-chrome visual weight, one icon language, motion that communicates real state rather than decorates, progressive disclosure into a side canvas instead of bloating the message stream, and coding-agent-specific diff/collapse conventions. Pure reference, no scripts. |
+| [`ai-generated-ui-craft`](skills/ai-generated-ui-craft) | Orthogonal to both of the above — not a UI category, but the generation-time self-critique process that separates a considered AI-built design from a templated one. Names the actual cliché cluster AI-generated UI falls into by default (warm-cream-serif-terracotta, purple-gradient hero, Inter-as-safe-font, emoji section markers, rounded-lg everywhere) and gives the process that avoids it: ground every choice in the specific subject, honor an existing design system before inventing a new one, choose neutrals/type deliberately rather than defaulting to them, design both themes with equal care, spend boldness in exactly one place, and run an explicit self-critique pass ("would this same plan show up on an unrelated project?") before shipping. Pure reference, no scripts. |
 
 ## Install
 
