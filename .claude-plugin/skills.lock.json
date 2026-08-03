@@ -6,7 +6,7 @@
   "skills": {
     "app-engineering-skills:ai-generated-ui-craft": {
       "path": "skills/ai-generated-ui-craft",
-      "sha256": "ef7d1be819ea2fe52df541cc6503126c84a765c133a061be715a3d254e9ee776",
+      "sha256": "2b028648cda5e3780e9f96f61105a4671ea57e3d73238b6001e3b8924481e632",
       "version": "0.9.0"
     },
     "app-engineering-skills:conversational-ui-restraint": {

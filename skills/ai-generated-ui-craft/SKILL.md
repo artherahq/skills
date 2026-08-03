@@ -43,8 +43,9 @@ run a self-critique pass that catches genericness before shipping, not after.
 
 ## 2. Honor what's already there before inventing something new
 
-- Check for an existing design system first — a tokens file, a CLAUDE.md
-  or project instructions, existing component styles in the codebase.
+- Check for an existing design system first — a tokens file, an agent
+  instructions file (`ARIA.md`, `CLAUDE.md`, `AGENTS.md`, …), existing
+  component styles in the codebase.
   When one exists, apply it; new choices only fill genuine gaps, they
   never override what's already decided. This single check prevents most
   "looks like a different app pasted in" problems in an existing codebase.
