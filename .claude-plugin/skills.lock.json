@@ -14,6 +14,11 @@
       "sha256": "79bca0d4e1838140002bdf0e0ca202331b3a39cf53bc03682863c13bc66f1df7",
       "version": "0.9.0"
     },
+    "app-engineering-skills:minimal-editorial-exports": {
+      "path": "skills/minimal-editorial-exports",
+      "sha256": "721604e6292e1b961a6307925542ad3ad91842a445f539337743c53afdecac8f",
+      "version": "0.9.0"
+    },
     "app-engineering-skills:terminal-software-design": {
       "path": "skills/terminal-software-design",
       "sha256": "f718eda25f2455ffff74d53ec952c9ee3f54895cdaee31e2a750330f4ff59ac5",

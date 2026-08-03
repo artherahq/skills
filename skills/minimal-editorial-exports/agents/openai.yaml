@@ -1,0 +1,4 @@
+interface:
+  display_name: "Minimal Editorial Exports"
+  short_description: "Quiet, restrained cover/title style for report exports"
+  default_prompt: "Use $minimal-editorial-exports to style this report cover/title slide/chart export."
