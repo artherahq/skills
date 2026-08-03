@@ -23,9 +23,20 @@ jobs:
       - name: Verify lock file
         run: python scripts/build_skill_lock.py --check
 
+      # The lock is derived from marketplace.json, so it cannot see a skill that
+      # was added to disk and never registered — that skill just silently ships
+      # to no one. This catches it, plus missing policies, descriptors, and
+      # README rows.
+      - name: Validate catalog consistency
+        run: python scripts/validate_catalog.py
+
       - name: Test lock builder
         working-directory: scripts
         run: pytest test_build_skill_lock.py -q
+
+      - name: Test catalog validator
+        working-directory: scripts
+        run: pytest test_validate_catalog.py -q
 
   point-in-time-research:
     name: point-in-time-research harness

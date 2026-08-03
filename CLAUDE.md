@@ -7,9 +7,15 @@ you must run and update so the catalog stays internally consistent.
 
 ## Adding or editing a skill — the four things that must stay in sync
 
-A skill is not "added" until all four are done. Three of them are enforced by
-CI, so skipping one fails the build rather than silently shipping a broken
-catalog.
+A skill is not "added" until all four are done. All four are enforced by CI
+(`scripts/validate_catalog.py` plus the lock check), so skipping one fails the
+build rather than silently shipping a broken catalog.
+
+That was not true until the validator existed. The lock check alone cannot see
+an unregistered skill, because the lock is *derived from* marketplace.json — a
+skill added to disk and never registered produces no stale entry, no failure,
+and no installation anywhere. Verified by adding an unregistered probe skill:
+the lock check passed, the validator caught it.
 
 1. **The skill folder** — `skills/<name>/SKILL.md`, plus `skill-policy.json`
    and `agents/openai.yaml` (both required), and optionally `references/` and
@@ -70,14 +76,10 @@ with respect to what the catalog can now do.
 ## Verify before committing
 
 ```bash
-python scripts/build_skill_lock.py --check     # lock is current
-python -c "
-import json, os
-m = json.load(open('.claude-plugin/marketplace.json'))
-reg = {s.split('/')[-1] for p in m['plugins'] for s in p['skills']}
-disk = {d for d in os.listdir('skills') if os.path.isfile(f'skills/{d}/SKILL.md')}
-assert not (disk - reg), f'unregistered skills: {disk - reg}'
-assert not (reg - disk), f'registered but missing on disk: {reg - disk}'
-print('marketplace and disk agree:', len(reg), 'skills')
-"
+python scripts/build_skill_lock.py --check   # integrity lock is current
+python scripts/validate_catalog.py           # disk / marketplace / policy / descriptor / README agree
 ```
+
+Both are what CI runs. `validate_catalog.py --demo` shows what a failure looks
+like against a synthetic broken catalog if you want to see the output shape
+without breaking anything.
