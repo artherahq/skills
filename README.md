@@ -77,21 +77,36 @@ checkout and registers each skill as `plugin:skill`:
 
 ```bash
 git clone https://github.com/artherahq/skills aria-skills
-export ARIA_SKILLS_PATH=/path/to/aria-skills   # or keep it next to aria-code
+export ARIA_SKILLS_PATH=/path/to/aria-skills/skills
 ```
+
+`ARIA_SKILLS_PATH` points at a directory that *contains* skill folders — the
+`skills/` subdirectory, not the repository root. Pointing it at the root also
+picks up `template/SKILL.md` as a skill named `your-skill-name`. Nothing
+dangerous happens (it has no lock entry, and an unlocked skill can never
+activate automatically) but it is noise you do not want in the catalog.
+
+Cloning the repo as `aria-skills` next to `aria-code` needs no environment
+variable at all — that sibling path is one of the defaults.
 
 ```text
 $quant-research-skills:point-in-time-research
-$quant-research-skills:factor-research
+$quant-research-skills:equity-research-report
 $quant-research-skills:backtest-validation
 $quant-research-skills:compliance-audit-trail
 $quant-research-skills:multiple-testing-correction
 $quant-research-skills:gamma-exposure
 $quant-research-skills:risk-assessment
+$quant-research-skills:factor-research
 $quant-research-skills:strategy-generation
 $quant-research-skills:portfolio-optimization
 $quant-research-skills:execution-position
-$quant-research-skills:equity-research-report
+$app-engineering-skills:ui-design-system
+$app-engineering-skills:trading-ui-patterns
+$app-engineering-skills:terminal-software-design
+$app-engineering-skills:conversational-ui-restraint
+$app-engineering-skills:ai-generated-ui-craft
+$realty-operations-skills:operator-revenue-integrity
 ```
 
 Inside Aria Code:

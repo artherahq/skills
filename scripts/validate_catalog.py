@@ -112,6 +112,21 @@ def validate(repo: Path = REPO) -> list[str]:
         if f"skills/{name})" not in readme:
             failures.append(f"{name}: not listed in README.md — undiscoverable")
 
+        # The README's copy-pasteable `$plugin:skill` install list drifted stale
+        # once already: it still showed 11 quant skills after 6 more had shipped
+        # across two new plugins. A reader pastes what is printed, so a missing
+        # line is a skill nobody invokes.
+        # Skip when unregistered — that is already reported above, and there is
+        # no plugin name to build the qualified form from.
+        plugin = registered.get(name)
+        if plugin:
+            qualified = f"${plugin}:{name}"
+            if "$quant-research-skills:" in readme and qualified not in readme:
+                failures.append(
+                    f"{name}: missing from the README install list (expected "
+                    f"{qualified})"
+                )
+
     return failures
 
 

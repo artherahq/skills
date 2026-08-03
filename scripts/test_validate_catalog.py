@@ -119,3 +119,14 @@ def test_all_failures_are_reported_not_just_the_first(tmp_path):
         _catalog(tmp_path, register=False, readme=False, policy=False, descriptor=False)
     )
     assert len(failures) >= 4
+
+
+def test_stale_readme_install_list_is_caught(tmp_path):
+    root = _catalog(tmp_path)
+    (root / "README.md").write_text(
+        "# demo\n\n| [`demo-skill`](skills/demo-skill) | does things |\n\n"
+        "$quant-research-skills:something-else\n",
+        encoding="utf-8",
+    )
+    failures = validate(root)
+    assert any("missing from the README install list" in f for f in failures)
