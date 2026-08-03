@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Design System"
+  short_description: "Freeze your own design decisions into portable tokens, then enforce them"
+  default_prompt: "Use $ui-design-system to capture my design tokens and lint my UI against them."

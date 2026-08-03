@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compliance Audit Trail"
+  short_description: "Validate a governance manifest before it reaches real due diligence"
+  default_prompt: "Use $compliance-audit-trail to audit this governance manifest for unsupported capability claims and missing evidence."

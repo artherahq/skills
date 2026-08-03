@@ -1,0 +1,4 @@
+interface:
+  display_name: "Multiple Testing Correction"
+  short_description: "Correct for multiplicity before calling any result significant"
+  default_prompt: "Use $multiple-testing-correction to adjust these results for the number of hypotheses actually tested."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Factor Research"
+  short_description: "Test whether a cross-sectional factor genuinely predicts returns"
+  default_prompt: "Use $factor-research to evaluate this factor's IC, decay, quantile monotonicity, and turnover."

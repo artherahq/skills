@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operator Revenue Integrity"
+  short_description: "Verify self-reported revenue against signals the operator does not control"
+  default_prompt: "Use $operator-revenue-integrity to check this operator's declared revenue against independent evidence before settling."

@@ -4,64 +4,89 @@
   "repository": "https://github.com/artherahq/skills",
   "catalog_version": "0.9.0",
   "skills": {
+    "app-engineering-skills:ai-generated-ui-craft": {
+      "path": "skills/ai-generated-ui-craft",
+      "sha256": "2b028648cda5e3780e9f96f61105a4671ea57e3d73238b6001e3b8924481e632",
+      "version": "0.9.0"
+    },
+    "app-engineering-skills:conversational-ui-restraint": {
+      "path": "skills/conversational-ui-restraint",
+      "sha256": "79bca0d4e1838140002bdf0e0ca202331b3a39cf53bc03682863c13bc66f1df7",
+      "version": "0.9.0"
+    },
+    "app-engineering-skills:terminal-software-design": {
+      "path": "skills/terminal-software-design",
+      "sha256": "f718eda25f2455ffff74d53ec952c9ee3f54895cdaee31e2a750330f4ff59ac5",
+      "version": "0.9.0"
+    },
+    "app-engineering-skills:trading-ui-patterns": {
+      "path": "skills/trading-ui-patterns",
+      "sha256": "50267e363e44d051a607696281ef586f3c8f83d5d4e664ff76b842abe3f035f9",
+      "version": "0.9.0"
+    },
     "app-engineering-skills:ui-design-system": {
       "path": "skills/ui-design-system",
-      "sha256": "8b4801a97478d5a3389d165f6223cf9e6a78084c2541d4f84855cec0aa95115c",
+      "sha256": "2ba8e92367ece1c25e6c5f75f0d02b61895a88922641ff2c65c3f26cf42b6ba9",
       "version": "0.9.0"
     },
     "quant-research-skills:backtest-validation": {
       "path": "skills/backtest-validation",
-      "sha256": "1d52381a23da5cc516d7aff11f82ceedebadd2dfdee79a8dff5affbae6d07356",
+      "sha256": "3e8fbe9e534aafe6c6cb4aec56e7459ac7ae377f2f1ecd7f0942eea9ab0b3218",
       "version": "0.9.0"
     },
     "quant-research-skills:compliance-audit-trail": {
       "path": "skills/compliance-audit-trail",
-      "sha256": "f71a1505723a649210a20d3348293a028e668fca9136a31388d967f2871e85f9",
+      "sha256": "1139fbbba43c097d3a13dafe39b710aba085b0e8fb84a6e5d7df4c22db6596c6",
       "version": "0.9.0"
     },
     "quant-research-skills:equity-research-report": {
       "path": "skills/equity-research-report",
-      "sha256": "989972655bd94eb4b69d1fd3ccb74a09a699ec6e74c08d13707b6ffa8bf5c17f",
+      "sha256": "02eb93144b2289b7518098081835ddb50f71f83563f2951331d1935b35328373",
       "version": "0.9.0"
     },
     "quant-research-skills:execution-position": {
       "path": "skills/execution-position",
-      "sha256": "c26de4a3bb5279e111b0260bf51cd14814c84088d1627b1a6e9e1a75963e86ef",
+      "sha256": "a2d5659bb88a1a1108b32cd5a51e81c2a26e8ec0def0155a339bd4e15bd87dfa",
       "version": "0.9.0"
     },
     "quant-research-skills:factor-research": {
       "path": "skills/factor-research",
-      "sha256": "7ca019a498013ad1084206b59c66d7dc7a734e29f1860a87b35df9f3617d6756",
+      "sha256": "52c35bdc911a55ccef9f8ca4d47ef6084a5715f2b6f3dd82189b008a9174f087",
       "version": "0.9.0"
     },
     "quant-research-skills:gamma-exposure": {
       "path": "skills/gamma-exposure",
-      "sha256": "3dcafefaeb86ba0042ef39675e8e2723649bcb48c55ecc166a78622b34c71e4a",
+      "sha256": "8e99fc7211f61dafed7ca3994aee90a90fea0814a3d25c4ed990799ad0982c64",
       "version": "0.9.0"
     },
     "quant-research-skills:multiple-testing-correction": {
       "path": "skills/multiple-testing-correction",
-      "sha256": "38771e5e5c0cfc3fdad71bb0a8b6a57fb814c555794ceaa16fb84b565b1b81ee",
+      "sha256": "f11f3bb2b2d5d976a51908abda53694873ede976b59000162546ee57e014aac1",
       "version": "0.9.0"
     },
     "quant-research-skills:point-in-time-research": {
       "path": "skills/point-in-time-research",
-      "sha256": "135165d672055f91cf13d952070f5673aadf15a51a9f015b21e9d9bfadd7d7af",
+      "sha256": "e391d61bc892529c69c7356b297e4396926c3d139462da91f8418769e461c176",
       "version": "0.9.0"
     },
     "quant-research-skills:portfolio-optimization": {
       "path": "skills/portfolio-optimization",
-      "sha256": "58b825d7c7535f0930191ea4f9fabb14baf4d1c7cbc7c6429c2e0f2049f28761",
+      "sha256": "e3e5f5f6846164336e4d186aa7466026c38661783ee4f42df496d26aff1f62c0",
       "version": "0.9.0"
     },
     "quant-research-skills:risk-assessment": {
       "path": "skills/risk-assessment",
-      "sha256": "536a8150a7ab6dbd51207c74f8fd95d5644e364631ef792b97382377329b7d08",
+      "sha256": "20aa1cbba789d51df36e0696984c0721f32b37cc5c35a4c9623f953dc71c5608",
       "version": "0.9.0"
     },
     "quant-research-skills:strategy-generation": {
       "path": "skills/strategy-generation",
-      "sha256": "55ebb5b71a99ceb3315a3f56ef94f4e8826a52c8fe6545cd412eaaa081f922a6",
+      "sha256": "191eb595327e1e2149a7b35efa063c3199bd7566e01687777640dc72b1d91628",
+      "version": "0.9.0"
+    },
+    "realty-operations-skills:operator-revenue-integrity": {
+      "path": "skills/operator-revenue-integrity",
+      "sha256": "e80b2c0d49b1a151d4357938e2cd8937f9b7dfb928429916c85b4a48db008dea",
       "version": "0.9.0"
     }
   }

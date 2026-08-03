@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+# ]
+# ///
 """
 information_set_compare.py — the A–D point-in-time information-set comparison.
 

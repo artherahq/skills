@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "numpy",
+#   "scipy",
+# ]
+# ///
 """multiplicity_gate.py — multiple-testing correction (Bonferroni / Benjamini-
 Hochberg FDR) for a batch of significance tests, plus a Fundamental Law of
 Active Management (Grinold 1989, IR ~= IC * sqrt(Breadth)) check for whether

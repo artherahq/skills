@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strategy Generation"
+  short_description: "Turn a trading idea into a disciplined, testable strategy spec"
+  default_prompt: "Use $strategy-generation to turn this idea into a strategy spec with hard risk controls and validation gates."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portfolio Optimization"
+  short_description: "Estimation-robust weights, checked honestly against equal weight"
+  default_prompt: "Use $portfolio-optimization to produce defensible portfolio weights and test whether the optimizer beats equal weight."

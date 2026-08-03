@@ -35,13 +35,29 @@
     {
       "name": "app-engineering-skills",
       "version": "0.9.0",
-      "description": "Skills that help the user build and enforce their own app-engineering conventions — a design system of their choosing — separate from the quant-research pipeline.",
+      "description": "Skills that help the user build and enforce their own app-engineering conventions — a design system of their choosing, reference-product UI patterns (X, TradingView, Trading212) for trading/investing apps, plus the category disciplines (dense terminals vs. conversational UI) and the generation-time craft pass that keeps AI-built UI from reading as templated — separate from the quant-research pipeline.",
       "source": "./",
       "homepage": "https://github.com/artherahq/skills",
       "repository": "https://github.com/artherahq/skills",
       "strict": false,
       "skills": [
-        "./skills/ui-design-system"
+        "./skills/ui-design-system",
+        "./skills/trading-ui-patterns",
+        "./skills/terminal-software-design",
+        "./skills/conversational-ui-restraint",
+        "./skills/ai-generated-ui-craft"
+      ]
+    },
+    {
+      "name": "realty-operations-skills",
+      "version": "0.9.0",
+      "description": "Skills for operating-rights and revenue-share property arrangements, where the counterparty reports the number that determines what they owe. Separate vertical from the public-market research pipeline — verifying a private operator's declared revenue is a different discipline from analysing a listed company.",
+      "source": "./",
+      "homepage": "https://github.com/artherahq/skills",
+      "repository": "https://github.com/artherahq/skills",
+      "strict": false,
+      "skills": [
+        "./skills/operator-revenue-integrity"
       ]
     }
   ]

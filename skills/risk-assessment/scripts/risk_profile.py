@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#   "numpy",
+#   "pandas",
+# ]
+# ///
 """
 risk_profile.py — portfolio risk decomposition on the portfolio's OWN history.
 

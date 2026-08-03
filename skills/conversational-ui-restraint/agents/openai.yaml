@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conversational UI Restraint"
+  short_description: "Design chat and copilot interfaces that get out of the content's way"
+  default_prompt: "Use $conversational-ui-restraint to review this chat interface for content-first hierarchy and restraint."

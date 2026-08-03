@@ -1,0 +1,78 @@
+{
+  "schema_version": "aria.trading-ui-patterns.v1",
+  "patterns": {
+    "x_timeline_post": {
+      "product": "X",
+      "description": "A single post in a scrolling timeline: avatar, name/handle, timestamp, body text, optional media/chart-embed, action bar below.",
+      "required_fields": ["avatar", "display_name", "handle", "timestamp", "body_text", "action_bar"],
+      "recommended_fields": ["media_embed", "reply_context"],
+      "forbidden_fields": ["like_count_without_like_action", "emoji_as_action_icon"],
+      "rules": [
+        {"field": "tap_target_pt", "min": 44, "severity": "fail", "message": "Action-bar buttons below the 44pt minimum touch target"},
+        {"field": "timestamp_style", "equals": "relative", "severity": "warn", "message": "Timestamps should read as relative ('3h', '2d') in a timeline, not absolute, to match the reference convention"}
+      ]
+    },
+    "x_action_bar": {
+      "product": "X",
+      "description": "Reply / repost / like / share row beneath a post. Each action shows its count only after the user has data to justify one; icons fill (color) on activation, not before.",
+      "required_fields": ["reply_action", "repost_action", "like_action", "share_action"],
+      "recommended_fields": ["view_count"],
+      "forbidden_fields": ["filled_icon_before_activation", "count_of_zero_shown_as_placeholder_text"],
+      "rules": [
+        {"field": "icon_set", "equals": "consistent_outline_set", "severity": "warn", "message": "Action icons should come from one consistent icon family, not mixed weights/styles"}
+      ]
+    },
+    "tradingview_watchlist_row": {
+      "product": "TradingView",
+      "description": "One row in a watchlist/quote list: symbol, last price, change value + change percent, direction color, optional intraday sparkline.",
+      "required_fields": ["symbol", "price", "change_value", "change_percent", "direction_color"],
+      "recommended_fields": ["sparkline", "volume"],
+      "forbidden_fields": ["decorative_icon_in_place_of_real_sparkline", "single_color_for_both_directions"],
+      "rules": [
+        {"field": "tap_target_pt", "min": 44, "severity": "fail", "message": "Row tap target below the 44pt minimum touch size"},
+        {"field": "price_font", "equals": "monospaced_tabular", "severity": "warn", "message": "Price/change columns should use tabular (monospaced-digit) figures so values don't visually jitter as they update"}
+      ],
+      "market_aware_fields": {
+        "direction_color": {
+          "default": "red_down_green_up",
+          "CN": "red_up_green_down",
+          "TW": "red_up_green_down",
+          "US": "red_down_green_up",
+          "HK": "red_down_green_up"
+        }
+      }
+    },
+    "tradingview_technical_rating_gauge": {
+      "product": "TradingView",
+      "description": "The Strong Sell → Strong Buy semicircle gauge summarizing an aggregate of MA/oscillator votes, with the needle position and a vote breakdown beneath it.",
+      "required_fields": ["needle_value", "rating_label", "buy_votes", "sell_votes", "neutral_votes"],
+      "recommended_fields": ["segment_labels"],
+      "forbidden_fields": ["gauge_shown_with_no_underlying_votes", "hardcoded_neutral_when_data_insufficient"],
+      "rules": [
+        {"field": "vote_sum_matches_total", "equals": true, "severity": "fail", "message": "buy_votes + sell_votes + neutral_votes must equal the total votes the needle position implies"},
+        {"field": "data_points_used", "min": 30, "severity": "warn", "message": "Fewer than ~30 bars of history behind the rating makes the aggregate statistically thin; disclose or suppress rather than show a confident needle"}
+      ]
+    },
+    "trading212_order_ticket": {
+      "product": "Trading212",
+      "description": "The simplified buy/sell entry sheet: mode toggle (buy/sell), quantity-vs-value toggle, single confirm action, estimated cost/proceeds shown before commit.",
+      "required_fields": ["side_toggle", "quantity_or_value_input", "estimated_total", "confirm_action"],
+      "recommended_fields": ["available_cash_display", "fee_disclosure"],
+      "forbidden_fields": ["confirm_enabled_before_valid_input", "hidden_fee_disclosed_only_after_confirm"],
+      "rules": [
+        {"field": "confirm_tap_target_pt", "min": 48, "severity": "fail", "message": "The primary confirm action is a high-consequence control and should exceed the generic 44pt minimum"},
+        {"field": "estimated_total_updates_live", "equals": true, "severity": "fail", "message": "Estimated total must recompute as quantity/value changes, not show a stale figure"}
+      ]
+    },
+    "trading212_holding_row": {
+      "product": "Trading212",
+      "description": "One row in a holdings/portfolio list: logo, name, quantity or weight, current value, unrealized P/L (value + percent).",
+      "required_fields": ["logo_or_mark", "name", "current_value", "pl_value", "pl_percent"],
+      "recommended_fields": ["quantity", "avg_cost"],
+      "forbidden_fields": ["pl_percent_without_pl_value", "pl_color_independent_of_sign"],
+      "rules": [
+        {"field": "tap_target_pt", "min": 44, "severity": "fail", "message": "Row tap target below the 44pt minimum touch size"}
+      ]
+    }
+  }
+}

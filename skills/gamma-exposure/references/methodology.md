@@ -1,5 +1,14 @@
 # GEX gate — methodology & interpretation
 
+## Primary source
+
+This gate's methodology is checked directly against SqueezeMetrics' original
+whitepaper, *Gamma Exposure (GEX): Quantifying hedge rebalancing in SPX
+options* (March 2016, revised December 2017, freely redistributable,
+sqzme.co) — not against secondary summaries. Where this gate's scope narrows
+or extends what that paper describes, it says so explicitly below rather than
+presenting an extension as if it were the original methodology.
+
 ## Gamma, per strike
 
 Black-Scholes gamma is identical for a call and a put at the same
@@ -22,19 +31,20 @@ sensitive to `r` in practice.
 
 ## Normalization: why `× S² × 0.01`
 
-Raw Black-Scholes gamma is "delta change per $1 move in the underlying, per
-option." Multiplying by open interest and the contract multiplier (100
-shares/contract, standard for US equity options) gives total delta
-exposure change per $1 move — useful, but not the number every public GEX
-calculator reports.
+SqueezeMetrics' original formula is simpler than most public calculators
+reproduce: `GEX = Γ · OI · 100` per contract, in **shares** — no `S²` term at
+all. Their own footnote: *"When computing for SPX, we denominate GEX in
+dollars"* — i.e. their dollar conversion is a share-count times spot price,
+not the `S² × 0.01` convention this skill (and most public retail GEX
+calculators) uses.
 
-The `× S² × 0.01` convention converts that into "notional dollar exposure
-per 1% move in the underlying" — SqueezeMetrics and the calculators that
-followed report GEX in this unit because it's comparable across tickers at
-wildly different price levels (a $50 stock and a $2,000 stock aren't
-comparable in raw dollars-per-$1-move terms). This is not a law of
-physics — it's a reporting convention. Keep it if reproducing/comparing
-against a standard GEX chart; state it explicitly if using something else.
+`× S² × 0.01` is a later popularization: it converts raw gamma into "notional
+dollar exposure per 1% move in the underlying," which is comparable across
+tickers at wildly different price levels (a $50 stock and a $2,000 stock
+aren't comparable in raw dollars-per-$1-move terms). Useful, standard among
+public GEX charting tools — but attribute it as the charting-tool convention,
+not SqueezeMetrics' original per-contract share formula. Not a law of
+physics either way — a reporting convention, state which one you're using.
 
 ## Sign convention — the part that's an assumption, not a formula
 
@@ -44,9 +54,24 @@ put_gex(K)  = -Gamma(K) * put_OI(K)  * multiplier * S^2 * 0.01
 net_gex(K)  = call_gex(K) + put_gex(K)
 ```
 
-The `+`/`-` split rests entirely on: *customers are net buyers of options,
-dealers are the counterparty (net sellers), and dealers delta-hedge their
-book.* Under that assumption:
+The `+`/`-` split is NOT a blanket "customers buy, dealers sell" rule — the
+original whitepaper gives call and put a *different* behavioral story (its
+"Four Assumptions" section), because it's easier to defend than one uniform
+claim:
+
+- **Calls**: investors are assumed net *sellers* (covered-call writing,
+  collar overwriting against existing stock) — dealers are the net *buyers*,
+  so dealers are net **long** call gamma (`+`).
+- **Puts**: investors are assumed net *buyers* (protective puts against
+  existing exposure) — dealers are the net *sellers*, so dealers are net
+  **short** put gamma (`-`).
+- A fourth, easy-to-miss assumption in the same section: dealers hedge
+  *precisely* to the option's delta. Real market-makers use hedging bands to
+  balance transaction cost against delta risk, so this is an additional
+  simplification layered on top of the positioning assumption — not
+  something unique to this implementation.
+
+Under these assumptions:
 
 - Rising price + positive dealer gamma → dealers buy the underlying to
   stay delta-neutral → hedging flow dampens the move (positive regime,
@@ -55,12 +80,13 @@ book.* Under that assumption:
   delta-neutral → hedging flow amplifies the move (negative regime,
   vol-amplifying).
 
-No public dataset confirms dealers are actually net short customer flow at
-any given moment — it's the standard assumption because it's usually
-approximately true for retail-heavy names, not because it's measured. A
-market-maker who is already long gamma from a prior trade, or a name with
-unusually two-sided institutional flow, can violate it. State the
-assumption; don't state the conclusion as fact.
+No public dataset confirms dealers are actually positioned this way at any
+given moment — it's the standard assumption because it's usually
+approximately true for retail-heavy names with visible call-overwriting and
+protective-put flow, not because it's measured. A market-maker who is
+already long gamma from a prior trade, or a name with unusually two-sided
+institutional flow, can violate it either leg. State the assumption; don't
+state the conclusion as fact.
 
 **The one-line version of the entire failure mode this skill exists to
 catch:** flip the `put_gex` sign to `+` instead of `-` (a plausible typo —
@@ -79,6 +105,14 @@ strike spacing, "nearest strike" can be off by half a strike-width, which
 matters when the flip point itself is the thing being reported as a level.
 No crossing in the chain's range → `zero_gamma_flip = None`; don't
 extrapolate outside the data you have.
+
+This per-strike flip level is a popularized extension from public GEX
+charting services, not part of the original whitepaper — SqueezeMetrics'
+own methodology computes a single aggregate GEX number for the whole
+underlying (summed across every strike *and* every expiration) and validates
+it against subsequent realized volatility, without locating a specific
+strike-price "flip point." Both are legitimate; don't present the strike-
+level flip as if it were the original paper's own construct.
 
 ## Gamma walls
 

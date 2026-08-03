@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI-Generated UI Craft"
+  short_description: "Keep AI-built interfaces from reading as templated"
+  default_prompt: "Use $ai-generated-ui-craft to review this design for the generic AI-design tells before shipping it."

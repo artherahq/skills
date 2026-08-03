@@ -1,0 +1,4 @@
+interface:
+  display_name: "Execution & Position Sizing"
+  short_description: "Size a signal into a risk-gated paper order intent, or refuse with reasons"
+  default_prompt: "Use $execution-position to size this signal against my risk limits and produce a paper order intent."

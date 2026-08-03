@@ -30,3 +30,6 @@ Write these as instructions to an agent, not prose for a human.
 - `scripts/your_script.py` — what it does and how to run it (give the exact
   command; prefer a self-testing `--demo` path).
 - `references/your_reference.md` — when to read it.
+- `agents/openai.yaml` — required. The human-facing entry point (display name,
+  one-line description, copy-pasteable `default_prompt` referencing
+  `$your-skill-name`). See `spec/README.md` for the shape.
