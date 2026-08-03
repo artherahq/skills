@@ -61,6 +61,15 @@ standards:
 | [`conversational-ui-restraint`](skills/conversational-ui-restraint) | The opposite instinct from `terminal-software-design`: for chat/copilot interfaces, restraint is correct, not density — the UI should disappear and the content (prose) should be what's remembered. Distills the actual discipline behind ChatGPT/Claude/Codex-style interfaces (not their internal tooling, which isn't knowable from outside — this is reverse-engineered from observable shipped design): near-monochrome color reserved for signal, content-over-chrome visual weight, one icon language, motion that communicates real state rather than decorates, progressive disclosure into a side canvas instead of bloating the message stream, and coding-agent-specific diff/collapse conventions. Pure reference, no scripts. |
 | [`ai-generated-ui-craft`](skills/ai-generated-ui-craft) | Orthogonal to both of the above — not a UI category, but the generation-time self-critique process that separates a considered AI-built design from a templated one. Names the actual cliché cluster AI-generated UI falls into by default (warm-cream-serif-terracotta, purple-gradient hero, Inter-as-safe-font, emoji section markers, rounded-lg everywhere) and gives the process that avoids it: ground every choice in the specific subject, honor an existing design system before inventing a new one, choose neutrals/type deliberately rather than defaulting to them, design both themes with equal care, spend boldness in exactly one place, and run an explicit self-critique pass ("would this same plan show up on an unrelated project?") before shipping. Pure reference, no scripts. |
 
+A third plugin, `realty-operations-skills`, covers operating-rights and
+revenue-share property arrangements — a separate vertical, because verifying a
+private operator's self-reported revenue is a different discipline from
+analysing a listed company:
+
+| Skill | What it does |
+|---|---|
+| [`operator-revenue-integrity`](skills/operator-revenue-integrity) | Verifies an operator's or tenant's self-reported revenue before it settles a revenue-share or guarantee. Rejects the check most people actually run — reconciling declared revenue against the operator's own POS — because POS, payment codes, and bookkeeping are all inside the counterparty's control, and an operator routing customers to a personal payment code produces records that are internally consistent and understated at once. Only signals the operator does not control count as evidence: utility meters, door-access and foot-traffic logs, delivery-platform settlements, inventory deliveries. Documents what each signal can and cannot establish plus its specific false-alarm modes (seasonal HVAC swings dominate the energy ratio; a wrong margin assumption moves inventory-implied revenue more than most real underreporting would). Orchestrates the `cashflow_verify`, `energy_anomaly`, `fulfillment_risk`, and `revenue_share` agents. |
+
 ## Install
 
 Aria Code discovers the catalog through `ARIA_SKILLS_PATH` or a sibling

@@ -83,6 +83,11 @@
       "path": "skills/strategy-generation",
       "sha256": "191eb595327e1e2149a7b35efa063c3199bd7566e01687777640dc72b1d91628",
       "version": "0.9.0"
+    },
+    "realty-operations-skills:operator-revenue-integrity": {
+      "path": "skills/operator-revenue-integrity",
+      "sha256": "e80b2c0d49b1a151d4357938e2cd8937f9b7dfb928429916c85b4a48db008dea",
+      "version": "0.9.0"
     }
   }
 }

@@ -47,6 +47,18 @@
         "./skills/conversational-ui-restraint",
         "./skills/ai-generated-ui-craft"
       ]
+    },
+    {
+      "name": "realty-operations-skills",
+      "version": "0.9.0",
+      "description": "Skills for operating-rights and revenue-share property arrangements, where the counterparty reports the number that determines what they owe. Separate vertical from the public-market research pipeline — verifying a private operator's declared revenue is a different discipline from analysing a listed company.",
+      "source": "./",
+      "homepage": "https://github.com/artherahq/skills",
+      "repository": "https://github.com/artherahq/skills",
+      "strict": false,
+      "skills": [
+        "./skills/operator-revenue-integrity"
+      ]
     }
   ]
 }
