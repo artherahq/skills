@@ -156,6 +156,144 @@ jobs:
             exit 1
           fi
 
+  backtest-validation:
+    name: backtest-validation harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/backtest-validation/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet pandas numpy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning validation_gauntlet.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_validation_gauntlet.py -q
+
+  execution-position:
+    name: execution-position harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/execution-position/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning position_gate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_position_gate.py -q
+
+  factor-research:
+    name: factor-research harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/factor-research/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet pandas numpy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning factor_evaluate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_factor_evaluate.py -q
+
+  portfolio-optimization:
+    name: portfolio-optimization harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/portfolio-optimization/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet pandas numpy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning optimize_portfolio.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_optimize_portfolio.py -q
+
+  risk-assessment:
+    name: risk-assessment harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/risk-assessment/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet pandas numpy pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning risk_profile.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_risk_profile.py -q
+
+  strategy-generation:
+    name: strategy-generation harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/strategy-generation/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning validate_strategy_spec.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_validate_strategy_spec.py -q
+
   ui-design-system:
     name: ui-design-system harness
     runs-on: ubuntu-latest
