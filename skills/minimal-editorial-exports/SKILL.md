@@ -79,6 +79,36 @@ software existed; the same logic applies here.
   image/chart field); `autofill_design`'s `data` argument should carry one
   headline value, not a dense field set.
 
+## Variation axes — don't let every export look identical
+
+Run this style enough times (one cover per symbol, one title slide per
+report) and a single fixed recipe becomes its own template — the exact
+genericness problem `ai-generated-ui-craft` warns about, just at the style
+level instead of the whole-page level. The fix isn't random variation
+(a randomly-placed layout on a financial document reads as arbitrary, not
+considered) — it's varying along a few independent axes, each driven by
+something real about *this* export, not a dice roll:
+
+- **Focal-point position** — centered / lower-third / upper-block. Derive
+  from something real when possible (e.g. a strong directional signal
+  implies weight toward one side) rather than defaulting to centered every
+  time purely out of habit.
+- **Focal-point type** — one number (headline return/price), one chart
+  (`aria.report.chart`'s output), or one short line of text — pick whichever
+  actually carries this specific report's story; don't reach for "always the
+  chart" or "always the number" regardless of what the report is about.
+- **Type pairing** — serif-only, monospace-only, or a serif headline +
+  monospace caption pair. Rotate deliberately across a batch (e.g. a
+  multi-symbol daily digest) rather than letting every export in the same
+  run pick the same pairing by default.
+- **Quiet ratio** — 70% vs 85%+ negative space is itself a choice, not just
+  a floor; a headline-only cover can afford more silence than one carrying a
+  chart.
+
+None of these axes touch the accent-color rule above — the accent stays
+tied to real signal meaning regardless of which layout/type/quiet-ratio
+combination gets picked.
+
 ## Checklist
 
 - [ ] Is at least 70% of the cover/title surface genuinely quiet, not just
@@ -92,3 +122,6 @@ software existed; the same logic applies here.
       multi-panel grid)?
 - [ ] Is this being applied to a cover/title/single-focal surface, not the
       dense report body itself?
+- [ ] If generating more than one export in the same run/batch, does the
+      focal-point position, focal-point type, or type pairing actually vary
+      across them — driven by something real, not left on autopilot?

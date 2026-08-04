@@ -16,7 +16,7 @@
     },
     "app-engineering-skills:minimal-editorial-exports": {
       "path": "skills/minimal-editorial-exports",
-      "sha256": "721604e6292e1b961a6307925542ad3ad91842a445f539337743c53afdecac8f",
+      "sha256": "bafeee78105e8522c6d2d827520981a4d4e78ea569e33fc4abd6e75fc12d60dd",
       "version": "0.9.0"
     },
     "app-engineering-skills:terminal-software-design": {
