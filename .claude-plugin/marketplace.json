@@ -35,7 +35,7 @@
     {
       "name": "app-engineering-skills",
       "version": "0.9.0",
-      "description": "Skills that help the user build and enforce their own app-engineering conventions — a design system of their choosing, reference-product UI patterns (X, TradingView, Trading212) for trading/investing apps, plus the category disciplines (dense terminals vs. conversational UI) and the generation-time craft pass that keeps AI-built UI from reading as templated — separate from the quant-research pipeline.",
+      "description": "Skills that help the user build and enforce their own app-engineering conventions — a design system of their choosing, reference-product UI patterns (X, TradingView, Trading212) for trading/investing apps, the category disciplines (dense terminals vs. conversational UI), the generation-time craft pass that keeps AI-built UI from reading as templated, plus editorial/poster styling for aria-code's own exports and for standalone creative assets across any domain — separate from the quant-research pipeline.",
       "source": "./",
       "homepage": "https://github.com/artherahq/skills",
       "repository": "https://github.com/artherahq/skills",
@@ -46,7 +46,8 @@
         "./skills/terminal-software-design",
         "./skills/conversational-ui-restraint",
         "./skills/ai-generated-ui-craft",
-        "./skills/minimal-editorial-exports"
+        "./skills/minimal-editorial-exports",
+        "./skills/minimal-editorial-poster"
       ]
     },
     {

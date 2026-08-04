@@ -1,0 +1,4 @@
+interface:
+  display_name: "Minimal Editorial Poster"
+  short_description: "Compile a minimal zine-poster prompt for any subject"
+  default_prompt: "Use $minimal-editorial-poster to compile a minimal zine-style poster prompt for this subject."
