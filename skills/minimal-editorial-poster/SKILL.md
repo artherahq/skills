@@ -7,11 +7,13 @@ description: >-
   financial-report styling. Trigger for "做一张极简海报", "zine风格的海报",
   "minimal poster for [subject]", "给这个故事配一张海报", or when the user
   wants a standalone poster-style creative asset rather than a data export.
-  Produces a ready-to-use image-generation prompt (for whichever image tool
-  the runtime has) plus a non-image fallback brief, since aria-code has no
-  image-generation tool built in today. Do NOT trigger for styling aria-code's
-  own report/PPTX/Canva exports (use `minimal-editorial-exports` for that —
-  this skill is for a standalone poster from a theme, not a data-export cover).
+  Produces a ready-to-use image-generation prompt and, when an image backend
+  is configured, actually executes it via aria.report.generate_image_local /
+  edit_image_local (self-hosted, no API key) or the OpenAI-backed equivalents
+  — falls back to prompt-only + a non-image brief when neither is available.
+  Do NOT trigger for styling aria-code's own report/PPTX/Canva exports (use
+  `minimal-editorial-exports` for that — this skill is for a standalone
+  poster from a theme, not a data-export cover).
 ---
 
 # Minimal Editorial Poster
@@ -25,10 +27,10 @@ domain-agnostic prompt compiler: it turns a theme into a disciplined image
 prompt, the same way a magazine art director turns a headline into a cover
 brief — one attention geometry, one anchor, one color, real restraint.
 
-aria-code has no image-generation tool wired in today, so this skill's real
-output is the **compiled prompt text** (and a non-image fallback brief) —
-handing that prompt to whatever image-generation capability the runtime has
-is the caller's job, not this skill's.
+aria-code can execute the compiled prompt directly when an image backend is
+configured (see Execution below) — the compiled prompt is still the primary
+artifact, but "compile and hand it off" is now the fallback path, not the
+only path.
 
 ## When this matters
 
@@ -92,6 +94,49 @@ the actual subject each time, not at random:
 - **Texture** — rotate across xerox/riso/halftone/letterpress/scan-noise
 - **Temperature** — quiet vs. plain vs. wistful vs. deadpan
 
+## Execution — turning the compiled prompt into a real image
+
+aria-code has two image backends, both MCP-exposed (`packages/aria_mcp/server.py`),
+mirroring the local-vs-cloud choice `local_llm_provider.py`/`openai_image_client.py`
+already make for chat:
+
+- **Local, self-hosted** (`local_image_provider.py`, default `stabilityai/sdxl-turbo`
+  fp16) — `aria.report.generate_image_local` for a from-scratch anchor,
+  `aria.report.edit_image_local` for an anchor that's an existing user photo.
+  No API key, no per-call cost. Needs the optional `image_gen` extra
+  installed and (once) ~4GB of fp16 weights downloaded — first call is slow,
+  later calls fast (confirmed on M1 Pro/MPS: ~10s for a 4-step from-scratch
+  generation once weights are cached).
+- **OpenAI-backed** (`openai_image_client.py`, `gpt-image-1`) —
+  `aria.report.generate_image` / `aria.report.edit_image`. Needs an OpenAI
+  key (`/apikey set openai sk-...`); real per-call cost.
+
+**Which tool to call is decided by the Anchor field (step 3):** an anchor
+that's the user's own existing photo → the *edit* tool with that file's path;
+any other anchor type (illustration, silhouette, block, specimen, type-only)
+→ the *generate* tool with no input image.
+
+**`strength` (edit tools only, 0–1) is the one parameter this skill has real
+tuned guidance for** — it controls how much the output is allowed to diverge
+from the input photo:
+- 0.35–0.45: conservative — keeps the original composition/likeness close,
+  treatment (duotone, texture) reads as a filter over the real photo
+- 0.5–0.6: the default starting point — real restyling while the original
+  subject and composition stay recognizable (confirmed on a real portrait:
+  duotone + simplified background + texture all came through at 0.55)
+- 0.65–0.75: aggressive — the anchor treatment dominates, useful when field 4
+  (anchor treatment) calls for something far from a straight photo (e.g.
+  full silhouette/line-art)
+
+Steps: 4 is `sdxl-turbo`'s trained regime (`guidance_scale=0.0` to match) —
+raising steps on a turbo-distilled model doesn't reliably improve quality,
+it just costs more time; only raise it if you switch `model` to a
+non-turbo checkpoint that expects real classifier-free guidance.
+
+If neither backend is configured (extra not installed, no OpenAI key), say
+so explicitly and fall back to the compiled-prompt-only output below — never
+silently skip presenting anything.
+
 ## Workflow
 
 1. Gather the theme/sentence/mood/brief from the user — ask if genuinely
@@ -102,9 +147,12 @@ the actual subject each time, not at random:
    this subject versus the last one compiled in the same session/batch.
 4. Compile into the Output Format below.
 5. Run the Quality Gate before presenting it.
-6. Present the compiled prompt — and if the runtime has no image-generation
-   tool available, say so explicitly and offer the non-image fallback brief
-   instead of silently doing nothing with it.
+6. If an image backend is configured (see Execution), actually call it —
+   local first (no cost) unless the user asked for OpenAI specifically —
+   using the Anchor field to choose generate vs. edit and, for edit, a
+   `strength` from the tuned ranges above. Otherwise present the compiled
+   prompt plus the non-image fallback brief and say plainly that no backend
+   is configured, rather than silently doing nothing with it.
 
 ## Negative Constraints
 
@@ -126,11 +174,17 @@ Texture: <one texture, applied subtly>
 Temperature: <one register>
 Avoid: <hard avoids relevant to this brief>
 
-FALLBACK BRIEF (no image-gen tool available)
+FALLBACK BRIEF (no image-gen backend configured)
 A one-paragraph plain-language description of the same composition, for a
 human designer or a non-image export path (e.g. handing to
 minimal-editorial-exports for a text/chart-only equivalent) to work from.
 ```
+
+When a backend is configured, the actual tool call follows immediately
+after this block — anchor = existing photo → `aria.report.edit_image_local`
+(or `_image` for OpenAI) with that file's path and a `strength` from the
+tuned ranges above; any other anchor → `aria.report.generate_image_local`
+(or `_image`) with the compiled prompt text.
 
 ## Quality Gate
 
@@ -142,8 +196,12 @@ minimal-editorial-exports for a text/chart-only equivalent) to work from.
 - [ ] Would this same compiled prompt work equally well for a completely
       different subject? If yes, it's too generic — revise field 3 (anchor)
       and field 6 (color) to be specific to this brief.
-- [ ] Named the fallback brief for runtimes without image-generation, not
-      just silently produced a prompt nobody can use?
+- [ ] If a backend is configured: chose edit vs. generate correctly from the
+      Anchor field, and for edit, picked `strength` from the tuned ranges
+      rather than defaulting blindly to 0.55 regardless of how far field 4
+      (anchor treatment) actually wants to diverge from the source photo?
+- [ ] If no backend is configured: said so explicitly and presented the
+      fallback brief, not just a prompt nobody can act on?
 - [ ] Confirmed this is a standalone poster request, not actually a request
       to style one of aria-code's own report/PPTX/Canva exports (that's
       `minimal-editorial-exports`)?
