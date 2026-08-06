@@ -14,6 +14,11 @@
       "sha256": "79bca0d4e1838140002bdf0e0ca202331b3a39cf53bc03682863c13bc66f1df7",
       "version": "0.9.0"
     },
+    "app-engineering-skills:industry-design-direction": {
+      "path": "skills/industry-design-direction",
+      "sha256": "bbc82d81f66e189598a8d8ec771e461b9a7043c5f60d6988e3ae26877ada659b",
+      "version": "0.9.0"
+    },
     "app-engineering-skills:minimal-editorial-exports": {
       "path": "skills/minimal-editorial-exports",
       "sha256": "bafeee78105e8522c6d2d827520981a4d4e78ea569e33fc4abd6e75fc12d60dd",

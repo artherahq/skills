@@ -1,0 +1,4 @@
+interface:
+  display_name: "Industry Design Direction"
+  short_description: "Pick style, palette, type, and page structure for a specific industry"
+  default_prompt: "Use $industry-design-direction to choose a visual direction for this product: which aesthetic, palette, font pairing, and page structure fit its industry."
