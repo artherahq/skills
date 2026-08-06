@@ -16,7 +16,7 @@
     },
     "app-engineering-skills:industry-design-direction": {
       "path": "skills/industry-design-direction",
-      "sha256": "bbc82d81f66e189598a8d8ec771e461b9a7043c5f60d6988e3ae26877ada659b",
+      "sha256": "744afa211f330e750b776367dcdcbafb76884019ef2e4e7351dcefaf39c815d5",
       "version": "0.9.0"
     },
     "app-engineering-skills:minimal-editorial-exports": {
@@ -37,6 +37,11 @@
     "app-engineering-skills:trading-ui-patterns": {
       "path": "skills/trading-ui-patterns",
       "sha256": "50267e363e44d051a607696281ef586f3c8f83d5d4e664ff76b842abe3f035f9",
+      "version": "0.9.0"
+    },
+    "app-engineering-skills:ui-asset-sourcing": {
+      "path": "skills/ui-asset-sourcing",
+      "sha256": "7e9b97b349a611a5c18fa81a26c89979c6b37b81c78df3411ab4aafae196801e",
       "version": "0.9.0"
     },
     "app-engineering-skills:ui-design-system": {

@@ -1,0 +1,4 @@
+interface:
+  display_name: "UI Asset Sourcing"
+  short_description: "Source icons, imagery, and logos without hallucinating SVGs or shipping emoji"
+  default_prompt: "Use $ui-asset-sourcing to pick the icon set and imagery for this UI, and to source or generate the actual assets."

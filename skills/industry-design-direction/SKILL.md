@@ -3,8 +3,9 @@ name: industry-design-direction
 description: >-
   Pick a concrete visual direction for a website or app in a specific industry —
   which aesthetic, which palette, which font pairing, which page structure —
-  from a library of 95 industry profiles, 96 palettes, 57 font pairings, and 30
-  landing structures. Trigger for "design a landing page for a dental clinic",
+  from a library of 95 industry profiles, 57 defined styles, 96 palettes, 57
+  font pairings, and 30 landing structures. Trigger for "design a landing page
+  for a dental clinic",
   "帮我设计一个餐厅网站", "what should a fintech app look like", "给这个 SaaS 产品定一套
   配色和字体", "我要做一个电商网站，用什么风格", or whenever someone needs a starting
   direction for a product whose industry is known but whose look is not.
@@ -30,7 +31,7 @@ This skill exists to make the choice explicit and industry-grounded, before
 any component is written. It is the *exploration* step. Once a direction is
 picked, `ui-design-system` turns it into enforceable tokens.
 
-## The four decisions, in this order
+## The five decisions, in this order
 
 Order matters — each one constrains the next, and taking them out of order is
 how you end up retrofitting a palette onto a layout that fights it.
@@ -42,19 +43,27 @@ how you end up retrofitting a palette onto a layout that fights it.
    primary style, viable alternates, the page structure, and — the part most
    worth reading — the constraint that industry most often gets wrong.
 
-2. **Palette** → `references/color_palettes.md`
+2. **What that style actually is** → `references/style_library.md`
+   The profile *names* a style; this defines it — colors, effects, theme
+   support, performance, the CSS that produces it, and a done-checklist.
+   Read the **"Do NOT use for"** line before the "Best for" line: a style
+   applied to the case it explicitly fails at is worse than a plain default.
+   Skipping this step is how a named style silently collapses back into
+   whatever the model already assumed it meant.
+
+3. **Palette** → `references/color_palettes.md`
    Same product-type key as the profile. Six roles: Primary, Secondary, CTA,
    Background, Text, Border. Take all six; picking only a primary and
    improvising the rest is how the neutral tones drift grey and the whole page
    flattens.
 
-3. **Type pairing** → `references/typography_pairings.md`
+4. **Type pairing** → `references/typography_pairings.md`
    Filter by the *Best for* line, not by what looks nice in isolation. A
    heading/body split is what stops a page reading as one undifferentiated
    block — a single family everywhere is the single most reliable tell of
    generated UI.
 
-4. **Page structure** → `references/landing_patterns.md`
+5. **Page structure** → `references/landing_patterns.md`
    Use the structure named in the industry profile. Each entry gives section
    order, where the primary CTA sits, a color strategy for that structure, and
    what actually converts for it.
@@ -90,7 +99,7 @@ dark text on that button. Check it before shipping, not after.
 1. Identify the industry from what the user described. If genuinely ambiguous
    between two profiles, read both and pick with a stated reason — do not
    silently average them into something generic.
-2. Read the four references in the order above, taking the specific values.
+2. Read the five references in the order above, taking the specific values.
 3. Present the direction as a short brief: style, six-role palette with hex
    values, heading/body fonts with their `@import`, and the section order.
    State the industry's most-missed constraint explicitly — that line is the
@@ -108,6 +117,8 @@ dark text on that button. Check it before shipping, not after.
 - [ ] All six palette roles specified, not just a primary?
 - [ ] Heading and body are *different* families, with a stated reason for the
       pairing beyond "it looks modern"?
+- [ ] Style looked up in `style_library.md`, and its "do NOT use for" line
+      checked against this product — not just the style's name repeated?
 - [ ] Section order taken from a named structure, not improvised?
 - [ ] The industry's most-missed constraint stated out loud, and visibly
       reflected in the direction rather than just quoted?
@@ -118,6 +129,9 @@ dark text on that button. Check it before shipping, not after.
 
 - `references/industry_profiles.md` — 95 industry profiles: style, alternates,
   page structure, dashboard style, palette direction, most-missed constraint
+- `references/style_library.md` — 57 styles defined: colors, effects, theme and
+  performance support, CSS, token starting points, done-checklists, and an
+  explicit "do not use for" per style
 - `references/color_palettes.md` — 96 six-role palettes with hex values and
   computed text/background contrast ratios
 - `references/typography_pairings.md` — 57 Google-Fonts pairings with mood,
