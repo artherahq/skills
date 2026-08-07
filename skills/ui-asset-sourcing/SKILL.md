@@ -132,7 +132,37 @@ title breaks the moment a 14-word title arrives.
 4. For generated imagery: build prompts that carry the palette hex values,
    estimate cost if using the paid backend, and generate.
 5. For stock or real logos: point at the correct source; do not fabricate.
-6. Run the quality gate.
+6. Run the quality gate — prefer `scripts/asset_lint.py` over eyeballing the
+   three mechanically-checkable items (see Automated Checks below).
+
+## Automated Checks
+
+Three of the Quality gate items below are mechanical, not judgment calls, so
+`scripts/asset_lint.py` checks them by grepping the actual generated code
+instead of relying on the gate being applied by eye:
+
+```bash
+python scripts/asset_lint.py path/to/src            # scan real files/dirs
+python scripts/asset_lint.py --demo                 # no data needed
+```
+
+- `emoji_icon` (error) — an emoji character standing in for an interface icon.
+- `invented_svg_path` (warn) — a long inline `<path d="...">` with no nearby
+  source citation (an import, a `// source: ...` comment). Can't *prove* the
+  path data was hand-recalled rather than fetched, but this is exactly the
+  shape that failure takes — a "logo" with no cited source renders as a blob.
+- `mixed_icon_set` (warn) — imports from more than one known icon library
+  (Lucide, Heroicons, Phosphor, Tabler, react-icons) across the scanned paths.
+
+The remaining Quality gate items (accessible names, palette hex values in
+generated-image prompts, no fabricated people/places/brands, realistic
+placeholder length) stay judgment calls this script doesn't attempt —
+automating those would launder a guess as a verified fact, which is worse
+than leaving them as prose. Note this script is intentionally separate from
+`ui-design-system`'s `design_lint.py`: that one enforces code against the
+*user's own declared design-tokens.json*, a different, tokens-shaped concern
+from universal icon/asset hygiene, which applies whether or not a design
+system has been frozen yet.
 
 ## Quality gate
 

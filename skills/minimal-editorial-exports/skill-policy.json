@@ -3,7 +3,7 @@
   "allowed_tools": ["read_file", "list_directory"],
   "permissions": ["read-only"],
   "scripts": {
-    "execution": "none",
+    "execution": "approval",
     "network": false,
     "workspace_write": false
   }

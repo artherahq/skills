@@ -109,6 +109,28 @@ None of these axes touch the accent-color rule above — the accent stays
 tied to real signal meaning regardless of which layout/type/quiet-ratio
 combination gets picked.
 
+## Automated Quality Gate
+
+`scripts/exports_gate.py` turns the checklist below into code, the same
+pattern `minimal-editorial-poster`'s `poster_gate.py` uses (these two skills
+are siblings — keep the two gates' shape aligned if one changes). Build a
+spec with `surface`, `export_format`, `quiet_pct`, `focal_point`,
+`focal_point_type`, `accent_color` (`{name, hex, source}`), `typography`,
+`texture`, `chrome_notes`, and — when part of a batch —
+`is_batch`/`variation_axis`/`variation_reason`, then:
+
+```bash
+python scripts/exports_gate.py --spec spec.json
+python scripts/exports_gate.py --demo
+```
+
+`--demo` compiles a dense cover wearing a "minimal" label (25% quiet space,
+borrowed sidebar/nav chrome, texture on a PPTX slide that can't render it,
+Inter/system-ui type) next to the corrected minimal-editorial compile for
+the same report — the first FAILs with named codes
+(`insufficient_quiet_space`, `borrowed_dashboard_chrome`,
+`texture_unsupported_by_format`, …), the second PASSes.
+
 ## Checklist
 
 - [ ] Is at least 70% of the cover/title surface genuinely quiet, not just

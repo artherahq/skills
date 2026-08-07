@@ -109,6 +109,30 @@ dark text on that button. Check it before shipping, not after.
    `ui-design-system` to capture it as tokens. If they want it critiqued for
    genericness after building, hand off to `ai-generated-ui-craft`.
 
+## Automated Data-Integrity Gate
+
+`references/color_palettes.md` opens with a factual claim: every printed
+contrast ratio was computed, not guessed, and all 96 palettes clear AA
+(4.5:1) for body text. Nothing enforced that claim stays true after the file
+gets hand-edited — a nudged hex value can silently invalidate a printed
+number that still reads as verified. `scripts/verify_contrast.py`
+re-derives every palette's ratio from its Background/Text hex pair via the
+WCAG relative-luminance formula and diffs it against the file's own printed
+value:
+
+```bash
+python scripts/verify_contrast.py          # audits references/color_palettes.md
+python scripts/verify_contrast.py --demo   # no data needed
+```
+
+Run this after any edit to `color_palettes.md`, and periodically otherwise —
+it is the only thing standing between "computed, not claimed" staying true
+and quietly becoming false. `--demo` shows a clean palette passing next to
+the same palette with one hand-nudged hex, which fails with `ratio_mismatch`
+and `fails_aa_body_text`. This is a data-integrity gate, not a design-
+judgment one — it has nothing to say about which palette to *pick*, only
+about whether the numbers next to it are still true.
+
 ## Quality gate
 
 - [ ] Did the industry profile actually change the output, or would this same

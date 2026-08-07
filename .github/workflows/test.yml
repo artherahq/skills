@@ -294,6 +294,29 @@ jobs:
       - name: Regression tests
         run: pytest test_validate_strategy_spec.py -q
 
+  industry-design-direction:
+    name: industry-design-direction harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/industry-design-direction/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning verify_contrast.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_verify_contrast.py -q
+
   ui-design-system:
     name: ui-design-system harness
     runs-on: ubuntu-latest
@@ -318,6 +341,29 @@ jobs:
       - name: Regression tests
         run: pytest -q
 
+  minimal-editorial-exports:
+    name: minimal-editorial-exports harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/minimal-editorial-exports/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning exports_gate.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_exports_gate.py -q
+
   minimal-editorial-poster:
     name: minimal-editorial-poster harness
     runs-on: ubuntu-latest
@@ -340,6 +386,29 @@ jobs:
 
       - name: Regression tests
         run: pytest test_poster_gate.py -q
+
+  ui-asset-sourcing:
+    name: ui-asset-sourcing harness
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: skills/ui-asset-sourcing/scripts
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependency
+        run: pip install --quiet pytest
+
+      - name: Smoke — the bundled harness runs and emits no warnings
+        run: |
+          python -W error::RuntimeWarning asset_lint.py --demo > /dev/null
+
+      - name: Regression tests
+        run: pytest test_asset_lint.py -q
 
   trading-ui-patterns:
     name: trading-ui-patterns harness
