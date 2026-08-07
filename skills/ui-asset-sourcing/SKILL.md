@@ -54,11 +54,39 @@ rather than designed.
   `@phosphor-icons/react`, …) and import icons by name. This is the right
   answer for almost every real project: the names are memorable and correct,
   the path data comes from the package.
-- If a raw SVG file is genuinely needed, direct the user to fetch it (the
-  set's website, or its GitHub raw file) rather than producing one yourself.
-- If you have web access in the current session, fetch it and paste the real
-  markup. If you do not, say so and give the import line instead — a stated
-  limitation is better than a plausible-looking wrong path.
+- If a raw SVG file is genuinely needed and you have network access,
+  `scripts/fetch_icon.py` pulls it from the registry's actual published
+  source (Lucide/Heroicons/Tabler/Phosphor/Simple Icons — see Automated
+  Fetching below) instead of hand-writing it — this is what closes the loop
+  `asset_lint.py`'s `invented_svg_path` check can otherwise only catch after
+  the fact.
+- If you do not have network access, say so and give the import line
+  instead — a stated limitation is better than a plausible-looking wrong path.
+
+## Automated Fetching
+
+```bash
+python scripts/fetch_icon.py --library lucide --name arrow-right          # prints real SVG to stdout
+python scripts/fetch_icon.py --library lucide --name arrow-right --out a.svg
+python scripts/fetch_icon.py --list-libraries
+python scripts/fetch_icon.py --demo                                       # offline, no network needed
+```
+
+Fetches from each registry's real published URL (`unpkg.com`/`raw.githubusercontent.com`
+for Lucide/Heroicons/Tabler/Phosphor/Simple Icons — see the script header for
+the exact templates) and validates the response actually parses as SVG with a
+real shape element before accepting it — several of these CDNs return HTTP 200
+with an HTML or plain-text error body for a bad name, so status code alone
+isn't proof. Fails loud with the resolved URL on a miss rather than writing
+garbage to disk. `--demo` proves the fetch/validate logic offline by injecting
+fixed responses (valid SVG, a disguised 404 page, an empty body) — it does not
+require network access, but real usage does; `--list-libraries` shows every
+registry's URL template without fetching anything.
+
+Deliberately does not vendor icon files into this repository — a copy here
+would silently go stale the moment the upstream registry updates, the same
+"quietly wrong forever" failure this catalog's other data-integrity gates
+exist to catch. Fetch at generation time instead of storing a copy.
 
 **Consistency rules that matter more than the set you picked:**
 

@@ -403,12 +403,13 @@ jobs:
       - name: Install test dependency
         run: pip install --quiet pytest
 
-      - name: Smoke — the bundled harness runs and emits no warnings
+      - name: Smoke — the bundled harnesses run and emit no warnings
         run: |
           python -W error::RuntimeWarning asset_lint.py --demo > /dev/null
+          python -W error::RuntimeWarning fetch_icon.py --demo > /dev/null
 
       - name: Regression tests
-        run: pytest test_asset_lint.py -q
+        run: pytest test_asset_lint.py test_fetch_icon.py -q
 
   trading-ui-patterns:
     name: trading-ui-patterns harness

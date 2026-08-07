@@ -41,7 +41,7 @@
     },
     "app-engineering-skills:ui-asset-sourcing": {
       "path": "skills/ui-asset-sourcing",
-      "sha256": "73ce6dce90d94352c2e34c3f244e6154718bd6c91d3b2d44a78fbcc622ae1539",
+      "sha256": "57985a5793f18be7239a771c304bbd8d20cadcb6a347390d4fb4af56cca55c1a",
       "version": "0.9.0"
     },
     "app-engineering-skills:ui-design-system": {
