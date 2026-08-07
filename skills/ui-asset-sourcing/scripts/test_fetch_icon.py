@@ -39,6 +39,31 @@ def test_resolve_url_error_message_lists_available_libraries():
         resolve_url("bogus", "x")
 
 
+# ───────────────────────────── simple-icons slug (not kebab-case) ──────────
+
+@pytest.mark.parametrize("brand,expected_slug", [
+    ("American Express", "americanexpress"),
+    ("Node.js", "nodedotjs"),
+    ("C++", "cplusplus"),
+    (".NET", "dotnet"),
+    ("Coca-Cola", "cocacola"),
+    ("GitHub", "github"),
+])
+def test_simple_icons_uses_real_slug_convention_not_kebab_case(brand, expected_slug):
+    # Simple Icons concatenates words and spells out punctuation instead of
+    # hyphenating like the other four registries — confirmed live against
+    # unpkg for americanexpress/nodedotjs/cplusplus/dotnet/cocacola before
+    # this test was written (a prior version of this function 404'd on all
+    # of these by hyphenating "american-express" instead).
+    url = resolve_url("simple-icons", brand)
+    assert url == f"https://unpkg.com/simple-icons@latest/icons/{expected_slug}.svg"
+
+
+def test_other_registries_still_use_kebab_case():
+    assert "arrow-right" in resolve_url("lucide", "Arrow Right")
+    assert "arrow-right" in resolve_url("heroicons", "arrow_right")
+
+
 # ───────────────────────────── validate_svg ────────────────────────────────
 
 def test_validate_svg_accepts_real_svg():

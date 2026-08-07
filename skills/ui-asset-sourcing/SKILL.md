@@ -136,7 +136,11 @@ themselves.
 
 ## Logos and brand marks
 
-- Real company logos: **Simple Icons** only. Do not draw them.
+- Real company logos: **Simple Icons** only. Do not draw them —
+  `scripts/fetch_icon.py --library simple-icons --name "<brand>"` pulls the
+  real mark. Note Simple Icons slugs are NOT kebab-case like the other four
+  registries (`americanexpress`, `nodedotjs`, `cplusplus`, not hyphenated) —
+  the script handles this, a manual URL guess likely won't.
 - The user's own logo: ask for the file. Do not generate a substitute and
   present it as theirs.
 - A new logo for a new brand is a real design engagement, not an asset-fetch

@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -49,14 +50,33 @@ _SHAPE_TAGS = ("<path", "<circle", "<rect", "<polygon", "<polyline", "<ellipse",
 _ERROR_PAGE_MARKERS = ("<html", "cannot get", "404", "not found", "error code")
 
 
+# Simple Icons slugs are NOT kebab-case like the other four registries — they
+# concatenate words with no separator and spell out certain punctuation
+# ("Node.js" -> "nodedotjs", "C++" -> "cplusplus", ".NET" -> "dotnet"). Verified
+# live against unpkg for americanexpress/adobephotoshop/visualstudiocode/
+# nodedotjs/cocacola. This table covers the common cases, not necessarily
+# every brand's exact slug — a miss fails loud via the 404/validate_svg path
+# below rather than silently writing the wrong icon.
+_SIMPLE_ICONS_CHAR_MAP = {"+": "plus", "#": "sharp", ".": "dot", "&": "and"}
+
+
+def _kebab_slug(name: str) -> str:
+    return name.strip().lower().replace("_", "-").replace(" ", "-")
+
+
+def _simple_icons_slug(name: str) -> str:
+    s = name.strip().lower()
+    for ch, word in _SIMPLE_ICONS_CHAR_MAP.items():
+        s = s.replace(ch, word)
+    return re.sub(r"[^a-z0-9]", "", s)
+
+
 def resolve_url(library: str, name: str) -> str:
     if library not in _REGISTRIES:
         raise ValueError(
             f"unknown library '{library}' — available: {', '.join(sorted(_REGISTRIES))}"
         )
-    # icon names in these registries are always lowercase kebab-case; normalize
-    # rather than fail on a caller passing "ArrowRight" or "arrow_right"
-    normalized = name.strip().lower().replace("_", "-").replace(" ", "-")
+    normalized = _simple_icons_slug(name) if library == "simple-icons" else _kebab_slug(name)
     return _REGISTRIES[library].format(name=normalized)
 
 
