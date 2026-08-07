@@ -146,7 +146,11 @@ silently skip presenting anything.
 3. Pick variation-axis values driven by what's actually different about
    this subject versus the last one compiled in the same session/batch.
 4. Compile into the Output Format below.
-5. Run the Quality Gate before presenting it.
+5. Run the Quality Gate before presenting it — prefer the bundled script
+   (`scripts/poster_gate.py`, see Automated Quality Gate below) over eyeballing
+   the checklist; it catches the exact class of mistake that reads fine in
+   isolation (two saturated colors, a hard-avoid term that leaked into the
+   anchor treatment, "70%+ empty" that's actually 15%).
 6. If an image backend is configured (see Execution), actually call it —
    local first (no cost) unless the user asked for OpenAI specifically —
    using the Anchor field to choose generate vs. edit and, for edit, a
@@ -185,6 +189,76 @@ after this block — anchor = existing photo → `aria.report.edit_image_local`
 (or `_image` for OpenAI) with that file's path and a `strength` from the
 tuned ranges above; any other anchor → `aria.report.generate_image_local`
 (or `_image`) with the compiled prompt text.
+
+## Automated Quality Gate
+
+`scripts/poster_gate.py` turns the checklist below into code — a spec that
+"reads fine" can still fail it, which is the point (a hard-avoid term hiding
+inside `anchor_treatment`, two `role: "anchor"` colors, `negative_space_pct`
+that's real but under 70). Build the spec as a JSON object with the nine
+compiled fields (see `compile_prompt`'s field names — `canvas`,
+`negative_space_pct`, `anchor`, `anchor_is_photo`, `anchor_treatment`,
+`typography`, `colors` (list of `{role, name, hex, source}`, exactly one
+`role: "anchor"`), `texture`, `temperature`, `avoids`, `subject_keywords`),
+then:
+
+```bash
+python scripts/poster_gate.py --spec spec.json      # compiled prompt + verdict + findings
+python scripts/poster_gate.py --demo                # no input needed — see below
+```
+
+`--demo` reproduces a real instance: the commercial travel-poster prompt this
+skill's own author actually sent to an image tool for a London skyline photo
+before this gate existed (full-bleed, two saturated colors, "dramatic
+cinematic lighting" — several Negative Constraints violations at once) next
+to the corrected minimal-editorial compile for the *same source photo* — one
+FAILs with named codes (`multiple_saturated_colors`, `forbidden_term_leak`,
+`insufficient_negative_space`, …), the other PASSes. `subject_keywords`
+drives the genericness check (field 3's "would this same prompt work for a
+different subject?") — declare the words that make this brief specific, and
+the gate flags an `anchor` that doesn't actually use any of them.
+
+When `anchor_is_photo` is true, the result also carries a
+`strength_recommendation` (range + rationale) from the tuned guidance in
+Execution below, keyed off keywords in `anchor_treatment` — so the edit-tool
+call doesn't default blindly to 0.55 regardless of what field 4 actually asked
+for.
+
+Verdict is `FAIL` if any check hard-fails (missing/insufficient field,
+forbidden-term leak, multiple anchor colors, generic anchor), `WARN` for
+softer signals (borderline negative-space, ungrounded anchor color, no
+`subject_keywords` declared), `PASS` otherwise. Treat `FAIL` as blocking —
+recompile the offending field — and `WARN` as a prompt to double-check, not
+an automatic block.
+
+## Cross-Runtime Execution
+
+The compiler and gate above (`SKILL.md` body + `poster_gate.py`) are pure
+Python and pure prose — no aria-code-specific tool calls — so they carry
+unchanged into any runtime that can load a `SKILL.md`-shaped instruction set
+and run a script or read its output. What differs per runtime is only which
+image backend actually renders the compiled prompt:
+
+- **Aria Code** — the Execution section below: local SDXL-Turbo
+  (`generate_image_local`/`edit_image_local`) or OpenAI `gpt-image-1`
+  (`generate_image`/`edit_image`), auto-selected by this skill.
+- **Claude (Claude Code / claude.ai)** — install this catalog as a plugin
+  (`.claude-plugin/marketplace.json` → `app-engineering-skills`) or symlink
+  this skill folder into a project's `.claude/skills/`; run `poster_gate.py`
+  the same way, then hand the compiled prompt to whatever image tool is
+  connected (e.g. a Canva MCP connector) — note that most connector-based
+  image tools don't expose a raw img2img `strength` parameter the way
+  `edit_image_local` does, so an existing-photo anchor will read as
+  "regenerated in this style" rather than "this photo, restyled."
+- **ChatGPT** — no native `SKILL.md` loader; paste this file's body into a
+  Custom GPT's instructions or a project's custom instructions. Execution is
+  actually the closest match of any non-Aria runtime: ChatGPT's built-in image
+  tool *is* `gpt-image-1`, the same backend this skill already targets for
+  the OpenAI-backed path, so the compiled prompt carries over with no
+  backend-mapping step.
+- **Kimi / others with function-calling but no skill loader** — same paste-as-
+  instructions approach; wire the compiled prompt to whatever image-generation
+  function the platform exposes, no tuned guidance carries over automatically.
 
 ## Quality Gate
 
